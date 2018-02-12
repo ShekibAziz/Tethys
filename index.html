@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Tethys</title>
+    <style>
+        #title{
+            color:white;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark justify-content-between">
+        <a id="title" class="navbar-brand">Hello I'm Tethys</a>
+    </nav>
+    
+  
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <button type="button" class="btn btn-dark">Show All</button>
+        <button type="button" class="btn btn-dark">Collapse All</button>
+  
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+    <div id="info">
+
+    </div>
+
+    <script>
+        var url = "http://localhost:9779/XQuery";
+        var dataKey = 'XQuery';
+        var dataValue = `(: import Tethys schema so we have type information about the docuements :)
+import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd";
+(: import utility functions :)
+import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq";
+
+
+let $xmldocument := 0  (: first document :)
+let $xmldocs := ()     (: no documents so far :)
+
+(: Find all of the desired detections.  
+   This query is a bit more complicated than it need by as we are tracking
+   which XML document the detections came from.  
+
+   This is sometimes useful, especially when there are multiple lines
+   of effort across the same time and space, although it is not really 
+   needed here.
+
+   We create a temporary variable with all of the detections and then sort them
+   in the next query.  Again, this is overengineering for this specific query,
+   but would be needed to return detections from multiple deployments in order.
+:)
+let $detections := for $item in (
+    for $det at $p in collection("Detections")/ty:Detections
+        let $xmldocument := $xmldocument + 1
+        let $xmldocs := ($xmldocs, $det/DataSource)
+        (: conditions on Detections group :)
+        where upper-case($det/DataSource/Site) = upper-case("M") and 
+              upper-case($det/DataSource/Project) = upper-case("SOCAL") and
+              $det/DataSource/Deployment = 38.000000 
+        return
+           for $detection in $det/OnEffort/Detection  (: OnEffort/OffEffort :)
+              (: conditions on individual Detections, here we use
+                 an abbreviation for the species name  :)
+              where $detection/SpeciesID = lib:abbrev2tsn("Zc", "NOAA.NMFS.v1") 
+           return
+                <Detection>
+                  {$detection/Start}
+                  {$detection/End}
+                  <idx>{xs:integer($p)}</idx>
+                </Detection>
+        )
+  return $item
+
+(: Sources contains the list of indices corresponding to all of the documents
+   from which we drew detections :)
+let $sources := distinct-values(for $d in $detections return $d/idx)
+
+(: Finally, we return the detections and a lsit of the data sources
+   from which they came. :)
+
+return
+<ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Detections>
+  {(: Rewrite the detections mapping each detection to a deployment/ensemble :)
+   for $d in $detections
+   order by $d/Start
+   return
+     <Detection>
+      {$d/Start}
+      {$d/End}
+      <idx>{index-of(($sources), $d/idx)}</idx>
+     </Detection>
+  }
+</Detections>
+<Sources>
+  {
+   (: Write out the information for the deployment/ensembles :)
+   for $source in $sources
+     return
+      collection("Detections")[xs:decimal($source)]/ty:Detections/DataSource
+  }
+</Sources>
+</ty:Result>`;
+
+
+
+
+        var data = {"XQuery":dataValue};
+        $.post(url, data, function(data){
+            console.log(data);
+          $('#info').html(data);  
+        })
+    </script>
+
+
+</body>
+</html>
