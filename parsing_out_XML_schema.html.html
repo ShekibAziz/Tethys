@@ -1,50 +1,52 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>jQuery.parseXML demo</title>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fast-xml-parser/2.9.2/parser.min.js"></script>
 </head>
+
 <body>
-<?xml version="1.0" encoding="UTF-8" ?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <?xml version="1.0" encoding="UTF-8" ?>
+  <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-<xs:element name="shiporder">
-  <xs:complexType>
-    <xs:sequence>
-      <xs:element name="orderperson" type="xs:string"/>
-      <xs:element name="shipto">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="name" type="xs:string"/>
-            <xs:element name="address" type="xs:string"/>
-            <xs:element name="city" type="xs:string"/>
-            <xs:element name="country" type="xs:string"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="item" maxOccurs="unbounded">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="title" type="xs:string"/>
-            <xs:element name="note" type="xs:string" minOccurs="0"/>
-            <xs:element name="quantity" type="xs:positiveInteger"/>
-            <xs:element name="price" type="xs:decimal"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-    <xs:attribute name="orderid" type="xs:string" use="required"/>
-  </xs:complexType>
-</xs:element>
+    <xs:element name="shiporder">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="orderperson" type="xs:string" />
+          <xs:element name="shipto">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="name" type="xs:string" />
+                <xs:element name="address" type="xs:string" />
+                <xs:element name="city" type="xs:string" />
+                <xs:element name="country" type="xs:string" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="item" maxOccurs="unbounded">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="title" type="xs:string" />
+                <xs:element name="note" type="xs:string" minOccurs="0" />
+                <xs:element name="quantity" type="xs:positiveInteger" />
+                <xs:element name="price" type="xs:decimal" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="orderid" type="xs:string" use="required" />
+      </xs:complexType>
+    </xs:element>
 
-</xs:schema>
- 
-<p id="demo"></p>
+  </xs:schema>
 
-<script>
-var xml = `<?xml version="1.0" encoding="UTF-8" ?>
+  <p id="demo"></p>
+
+  <script>
+    var xml = `<?xml version="1.0" encoding="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
 <xs:element name="shiporder">
@@ -78,140 +80,142 @@ var xml = `<?xml version="1.0" encoding="UTF-8" ?>
 
 </xs:schema>
 `;
-  
-  
 
 
-  
-  
-function xmlFunc(xml){
-  var parser = new DOMParser();
-  var xmlDoc = parser.parseFromString(xml, "text/xml")
-  var x = xmlDoc.documentElement.childNodes;
-  for(var i=0; i < x.length; i++){
-   if( x[i].nodeValue == undefined || x[i].nodeValue == null ){
-    console.log(x[i].getAttribute("name"));
-    console.log(x[i].getAttributeNode("name").nodeValue);
-    }
-    else {
-      continue;
-    }
-  }
-}
 
-//xmlFunc(xml);
-  
-  
-function jquery (xml){
-  var xmlDoc = $.parseXML(xml);
-  var name = $(xmlDoc).find('xs:element');
-  console.log("name: ",name);
-  console.log("all8: ",document.all[8]);
-  console.log("all10: ",document.all[10]);
-  console.log("all10: ",document.all[10].getAttribute("name"));
-}
- // jquery(xml);
-  
-  console.log("---------------------------------------");
-  
-  function working(xml){
-    var xmlDoc = $.parseXML(xml);
-    var name = $(xmlDoc).find('xs:element');
-    
-    for(var i=0; i < document.all.length; i++){
-     
-//      if(document.all[i].getAttribute("name") != null ) {
-//        if(document.all[i-1].getAttribute("name") == null){
-//          console.log("    ");
-//        }
-          console.log(document.all[i].getAttribute("name"));
-     // }
-    }
-  }
- // working(xml);
-  
-  var i=0;
-  function iterateDOMTree(node){
-   i++;
-    
-    if(node.nodeName != "#text"){
-      console.log("node: ",node);
-      console.log("node.attributes: ",node.attributes);
-      console.log("node.Experiment: ",node.attrib);
-      console.log("--------------");
-//      console.log(i+": ",node.getAttribute("name"));
-    }
-      for(node=node.firstChild; node != null; node=node.nextSibling){
-        iterateDOMTree(node);
+
+
+
+    function xmlFunc(xml) {
+      var parser = new DOMParser();
+      var xmlDoc = parser.parseFromString(xml, "text/xml")
+      var x = xmlDoc.documentElement.childNodes;
+      for (var i = 0; i < x.length; i++) {
+        if (x[i].nodeValue == undefined || x[i].nodeValue == null) {
+          console.log(x[i].getAttribute("name"));
+          console.log(x[i].getAttributeNode("name").nodeValue);
+        } else {
+          continue;
+        }
       }
-  }
-  var xmlDoc = $.parseXML(xml);
-  iterateDOMTree(xmlDoc);
-  
-  
-//  
-//  var jsObj = parser.parse(xml,{attrPrefix:"",ignoreTextNodeAttr: false});
-//  document.write(JSON.stringify(jsObj.xml["xs:sequence"]["xs:element"],null,4) + "<br>");
-////document.write(JSON.stringify(jsObj.xml["rs:data"]["z:row"][1],null,4) + "<br>");
-////document.write(JSON.stringify(jsObj.xml["rs:data"]["z:row"][2],null,4) + "<br>");
-////  
-//  
-  
-  
-  
-  
-  
-  
-  
-  
-  //using Xpath inside JavaScript
-//var xpathResult = document.evaluate(
-// "html/body//element", 
-// document, 
-// null, 
-// XPathResult.ANY_TYPE, 
-// null
-//);
-//  
-//var thisHeading = headings.iterateNext(); 
-//var alertText = "Level 2 headings in this document are:\n";
-//while (thisHeading) {
-//  alertText += thisHeading.textContent + "\n";
-//  thisHeading = headings.iterateNext();
-//}
-//alert(alertText);
-//  
+    }
 
-</script>
+    //xmlFunc(xml);
+
+
+    function jquery(xml) {
+      var xmlDoc = $.parseXML(xml);
+      var name = $(xmlDoc).find('xs:element');
+      console.log("name: ", name);
+      console.log("all8: ", document.all[8]);
+      console.log("all10: ", document.all[10]);
+      console.log("all10: ", document.all[10].getAttribute("name"));
+    }
+    // jquery(xml);
+
+
+
+
+
+
+    function working(xml) {
+      var xmlDoc = $.parseXML(xml);
+      var name = $(xmlDoc).find('xs:element');
+
+      for (var i = 0; i < document.all.length; i++) {
+
+        //      if(document.all[i].getAttribute("name") != null ) {
+        //        if(document.all[i-1].getAttribute("name") == null){
+        //          console.log("    ");
+        //        }
+        console.log(document.all[i].getAttribute("name"));
+        // }
+      }
+    }
+    //working(xml);
+    //console.log(document.all[8]);
+
+
+
+
+
+
+
+
+
+    var i = 0;
+
+    function iterateDOMTree(node) {
+      i++;
+
+      if (node.nodeName != "#text") {
+        //console.log("node: ", node);
+        // console.log("node.attributes: ", node.attributes);
+        // console.log("node.Experiment: ", node.attrib);
+        //console.log("--------------");
+        var something = node.getElementsByTagName("xs:element");
+        console.log("&: ", something[0].getAttribute("name"));
+        //console.log(i + ": ", node.getAttribute("name"));
+
+      }
+      for (node = node.firstChild; node != null; node = node.nextSibling) {
+        iterateDOMTree(node);
+
+      }
+    }
+    var xmlDoc = $.parseXML(xml);
+
+
+    iterateDOMTree(xmlDoc);
+
+
+
+    ////////////////////////////////////////////////////////////////////////
+    //We can only get the attribute from an array this is an example of it.
+    // var element = xmlDoc.getElementsByTagName("xs:element");
+    //console.log(element[1].getAttribute("name"));
+    /////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+    //  
+    //  var jsObj = parser.parse(xml,{attrPrefix:"",ignoreTextNodeAttr: false});
+    //  document.write(JSON.stringify(jsObj.xml["xs:sequence"]["xs:element"],null,4) + "<br>");
+    ////document.write(JSON.stringify(jsObj.xml["rs:data"]["z:row"][1],null,4) + "<br>");
+    ////document.write(JSON.stringify(jsObj.xml["rs:data"]["z:row"][2],null,4) + "<br>");
+    ////  
+    //  
+
+
+
+
+
+
+
+
+    //using Xpath inside JavaScript
+    //var xpathResult = document.evaluate(
+    // "html/body//element", 
+    // document, 
+    // null, 
+    // XPathResult.ANY_TYPE, 
+    // null
+    //);
+    //  
+    //var thisHeading = headings.iterateNext(); 
+    //var alertText = "Level 2 headings in this document are:\n";
+    //while (thisHeading) {
+    //  alertText += thisHeading.textContent + "\n";
+    //  thisHeading = headings.iterateNext();
+    //}
+    //alert(alertText);
+    //
+
+  </script>
 
 
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
