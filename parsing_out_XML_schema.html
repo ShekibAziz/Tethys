@@ -142,31 +142,66 @@
 
 
 
-
-    var i = 0;
-
+    //iterates through the dom depth first method
     function iterateDOMTree(node) {
-      i++;
+      console.log("node: ", node);
+      // console.log("node.attributes: ", node.attributes);
+      // console.log("node.Experiment: ", node.attrib);
+      //console.log("--------------");
+      //console.log(i + ": ", node.getAttribute("name"));
 
-      if (node.nodeName != "#text") {
-        //console.log("node: ", node);
-        // console.log("node.attributes: ", node.attributes);
-        // console.log("node.Experiment: ", node.attrib);
-        //console.log("--------------");
-        var something = node.getElementsByTagName("xs:element");
-        console.log("&: ", something[0].getAttribute("name"));
-        //console.log(i + ": ", node.getAttribute("name"));
-
-      }
-      for (node = node.firstChild; node != null; node = node.nextSibling) {
+      for (node = node.firstElementChild; node != null; node = node.nextElementSibling) {
         iterateDOMTree(node);
-
       }
     }
     var xmlDoc = $.parseXML(xml);
+    // iterateDOMTree(xmlDoc);
 
 
-    iterateDOMTree(xmlDoc);
+
+    //displaying the XML to see it visually
+    console.log(xml);
+    //parsed XML DOM
+    console.log(xmlDoc);
+    //Print the first layer(BFS method) of xmlDoc
+    var firstChildren = $(xmlDoc).children();
+    console.log(firstChildren);
+
+
+    // trying to traverse a three with bredth first method (this will enter each simbling before going into depth)
+    function BFSiteration(node) {
+
+      var queue = [];
+
+      queue.push(node);
+
+      currentTree = queue.shift();
+
+      while (currentTree) {
+        for (var i = 0; i < currentTree.children.length; i++) {
+          // console.log(currentTree.children.length);
+          // console.log(currentTree.children[i]);
+          queue.push(currentTree.children[i]);
+        }
+      }
+
+
+      console.log("node: ", currentTree);
+      currentTree = queue.shift;
+
+
+
+
+    }
+
+    console.log("------------");
+    BFSiteration(xmlDoc);
+
+
+
+
+
+
 
 
 
