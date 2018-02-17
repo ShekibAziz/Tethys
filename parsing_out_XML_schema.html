@@ -82,6 +82,44 @@
 `;
 
 
+    var xml2 = `<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://tethys.sdsu.edu/schema/1.0" elementFormDefault="unqualified"
+    xmlns="http://tethys.sdsu.edu/schema/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="CommonElements.xsd"/>
+
+    <xs:element name="Event">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Name" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Name of event</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="Description">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Type" type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>Short description of event type, e.g. pile driving</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element minOccurs="0" name="Info" type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>Textual description of event.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:group ref="ContactGroup"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Start" type="xs:dateTime"/>
+                <xs:element name="End" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>`;
+
+
 
 
 
@@ -154,10 +192,8 @@
         iterateDOMTree(node);
       }
     }
-    var xmlDoc = $.parseXML(xml);
+    var xmlDoc = $.parseXML(xml2);
     // iterateDOMTree(xmlDoc);
-
-
 
     //displaying the XML to see it visually
     console.log(xml);
@@ -182,32 +218,17 @@
       while (currentTree) {
 
         for (var i = 0; i < currentTree.children.length; i++) {
-          if (currentTree.nodeType == 1) {
-            var temp = currentTree.children[i].getAttribute("name");
-            console.log("temp", temp);
-            //console.log("currentID: ", currentTree.getAttribute("name"));
-            if (currentTree.children[i].getAttribute("name") != null && currentTree.getAttribute("name") != null) {
-              console.log("1", currentTree.getAttribute("name"), currentTree.children[i].getAttribute("name"));
-            } else if (temp == "shiporder") {
-              console.log("2 Root Node", currentTree.children[i].getAttribute("name"));
-            } else if (currentTree.children[i].getAttribute("name") != null) {
-              var nextStep = currentTree;
-              console.log(nextStep);
-              while (!nextStep.hasAttribute("name")) {
-
-                nextStep = currentTree.parentElement;
-                console.log(nextStep);
-              }
-              console.log("3", currentTree.getAttribute("name"), currentTree.children[i].getAttribute("name"));
-            } else {
-              console.log("4.there was an error");
-            }
+          if (i == 0) {
+            console.log("---")
           }
-          queue.push(currentTree.children[i]);
+          var final = currentTree.children[i];
+          queue.push(final);
+          if (currentTree.nodeType == 1 && final.hasAttributes("name")) {
+            console.log(final.getAttribute("name"));
+          }
         }
         currentTree = queue.shift();
       }
-
 
 
 
