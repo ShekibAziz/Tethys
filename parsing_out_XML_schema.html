@@ -175,19 +175,39 @@
 
       queue.push(node);
 
-      currentTree = queue.shift();
 
+      currentTree = queue.shift();
+      //var i = 0;
+      //var length = currentTree.children.length;
       while (currentTree) {
+
         for (var i = 0; i < currentTree.children.length; i++) {
-          // console.log(currentTree.children.length);
-          // console.log(currentTree.children[i]);
+          if (currentTree.nodeType == 1) {
+            var temp = currentTree.children[i].getAttribute("name");
+            console.log("temp", temp);
+            //console.log("currentID: ", currentTree.getAttribute("name"));
+            if (currentTree.children[i].getAttribute("name") != null && currentTree.getAttribute("name") != null) {
+              console.log("1", currentTree.getAttribute("name"), currentTree.children[i].getAttribute("name"));
+            } else if (temp == "shiporder") {
+              console.log("2 Root Node", currentTree.children[i].getAttribute("name"));
+            } else if (currentTree.children[i].getAttribute("name") != null) {
+              var nextStep = currentTree;
+              console.log(nextStep);
+              while (!nextStep.hasAttribute("name")) {
+
+                nextStep = currentTree.parentElement;
+                console.log(nextStep);
+              }
+              console.log("3", currentTree.getAttribute("name"), currentTree.children[i].getAttribute("name"));
+            } else {
+              console.log("4.there was an error");
+            }
+          }
           queue.push(currentTree.children[i]);
         }
+        currentTree = queue.shift();
       }
 
-
-      console.log("node: ", currentTree);
-      currentTree = queue.shift;
 
 
 
@@ -199,6 +219,8 @@
 
 
 
+    //bfs explanation
+    //https://code.tutsplus.com/articles/data-structures-with-javascript-tree--cms-23393
 
 
 
