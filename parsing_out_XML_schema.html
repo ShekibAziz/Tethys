@@ -192,7 +192,7 @@
         iterateDOMTree(node);
       }
     }
-    var xmlDoc = $.parseXML(xml2);
+    var xmlDoc = $.parseXML(xml);
     // iterateDOMTree(xmlDoc);
 
     //displaying the XML to see it visually
@@ -218,22 +218,31 @@
       while (currentTree) {
 
         for (var i = 0; i < currentTree.children.length; i++) {
-          if (i == 0) {
-            console.log("---")
-          }
+
           var final = currentTree.children[i];
           queue.push(final);
           if (currentTree.nodeType == 1 && final.hasAttributes("name")) {
+            if (i == 0)
+              console.log("---")
             console.log(final.getAttribute("name"));
+            //////////////////////////////////////////////////
+            /////////////////////////////////////////////////
+            //cannot find the parent of the first element because it doesnt exist we need to skip the first element
+            if (final.parentElement.hasAttribute("name")) {
+              print("     ", final.parentElement.getAttribute("name"));
+            } else if (final.parentElement.parentElement.hasAttribute("name")) {
+              print("     ", final.parentElement.parentElement.getAttribute('name'));
+            } else if (final.parentElement.parentElement.parentElement.hasAttribute("name")) {
+              print("     ", final.parentElement.parentElement.parentElement.getAttribute('name'));
+            }
+            //////////////////////////////////////////////////
+            //////////////////////////////////////////////////
           }
         }
         currentTree = queue.shift();
       }
-
-
-
-
     }
+
 
     console.log("------------");
     BFSiteration(xmlDoc);
