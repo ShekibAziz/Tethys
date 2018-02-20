@@ -2,51 +2,51 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<title>jQuery.parseXML demo</title>
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/fast-xml-parser/2.9.2/parser.min.js"></script>
+  <meta charset="utf-8">
+  <title>jQuery.parseXML demo</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fast-xml-parser/2.9.2/parser.min.js"></script>
 </head>
 
 <body>
-	<?xml version="1.0" encoding="UTF-8" ?>
-	<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <?xml version="1.0" encoding="UTF-8" ?>
+  <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-		<xs:element name="shiporder">
-			<xs:complexType>
-				<xs:sequence>
-					<xs:element name="orderperson" type="xs:string" />
-					<xs:element name="shipto">
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="name" type="xs:string" />
-								<xs:element name="address" type="xs:string" />
-								<xs:element name="city" type="xs:string" />
-								<xs:element name="country" type="xs:string" />
-							</xs:sequence>
-						</xs:complexType>
-					</xs:element>
-					<xs:element name="item" maxOccurs="unbounded">
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="title" type="xs:string" />
-								<xs:element name="note" type="xs:string" minOccurs="0" />
-								<xs:element name="quantity" type="xs:positiveInteger" />
-								<xs:element name="price" type="xs:decimal" />
-							</xs:sequence>
-						</xs:complexType>
-					</xs:element>
-				</xs:sequence>
-				<xs:attribute name="orderid" type="xs:string" use="required" />
-			</xs:complexType>
-		</xs:element>
+    <xs:element name="shiporder">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="orderperson" type="xs:string" />
+          <xs:element name="shipto">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="name" type="xs:string" />
+                <xs:element name="address" type="xs:string" />
+                <xs:element name="city" type="xs:string" />
+                <xs:element name="country" type="xs:string" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="item" maxOccurs="unbounded">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="title" type="xs:string" />
+                <xs:element name="note" type="xs:string" minOccurs="0" />
+                <xs:element name="quantity" type="xs:positiveInteger" />
+                <xs:element name="price" type="xs:decimal" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="orderid" type="xs:string" use="required" />
+      </xs:complexType>
+    </xs:element>
 
-	</xs:schema>
+  </xs:schema>
 
-	<p id="demo"></p>
+  <p id="demo"></p>
 
-	<script>
-		var xml = `<?xml version="1.0" encoding="UTF-8" ?>
+  <script>
+    var xml = `<?xml version="1.0" encoding="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
 <xs:element name="shiporder">
@@ -82,7 +82,7 @@
 `;
 
 
-		var xml2 = `<?xml version="1.0" encoding="UTF-8"?>
+    var xml2 = `<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema targetNamespace="http://tethys.sdsu.edu/schema/1.0" elementFormDefault="unqualified"
     xmlns="http://tethys.sdsu.edu/schema/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:include schemaLocation="CommonElements.xsd"/>
@@ -124,148 +124,193 @@
 
 
 
-		function xmlFunc(xml) {
-			var parser = new DOMParser();
-			var xmlDoc = parser.parseFromString(xml, "text/xml")
-			var x = xmlDoc.documentElement.childNodes;
-			for (var i = 0; i < x.length; i++) {
-				if (x[i].nodeValue == undefined || x[i].nodeValue == null) {
-					console.log(x[i].getAttribute("name"));
-					console.log(x[i].getAttributeNode("name").nodeValue);
-				} else {
-					continue;
-				}
-			}
-		}
+    function xmlFunc(xml) {
+      var parser = new DOMParser();
+      var xmlDoc = parser.parseFromString(xml, "text/xml")
+      var x = xmlDoc.documentElement.childNodes;
+      for (var i = 0; i < x.length; i++) {
+        if (x[i].nodeValue == undefined || x[i].nodeValue == null) {
+          console.log(x[i].getAttribute("name"));
+          console.log(x[i].getAttributeNode("name").nodeValue);
+        } else {
+          continue;
+        }
+      }
+    }
 
-		//xmlFunc(xml);
-
-
-		function jquery(xml) {
-			var xmlDoc = $.parseXML(xml);
-			var name = $(xmlDoc).find('xs:element');
-			console.log("name: ", name);
-			console.log("all8: ", document.all[8]);
-			console.log("all10: ", document.all[10]);
-			console.log("all10: ", document.all[10].getAttribute("name"));
-		}
-		// jquery(xml);
+    //xmlFunc(xml);
 
 
-
-
-
-
-		function working(xml) {
-			var xmlDoc = $.parseXML(xml);
-			var name = $(xmlDoc).find('xs:element');
-
-			for (var i = 0; i < document.all.length; i++) {
-
-				//      if(document.all[i].getAttribute("name") != null ) {
-				//        if(document.all[i-1].getAttribute("name") == null){
-				//          console.log("    ");
-				//        }
-				console.log(document.all[i].getAttribute("name"));
-				// }
-			}
-		}
-		//working(xml);
-		//console.log(document.all[8]);
+    function jquery(xml) {
+      var xmlDoc = $.parseXML(xml);
+      var name = $(xmlDoc).find('xs:element');
+      console.log("name: ", name);
+      console.log("all8: ", document.all[8]);
+      console.log("all10: ", document.all[10]);
+      console.log("all10: ", document.all[10].getAttribute("name"));
+    }
+    // jquery(xml);
 
 
 
 
 
 
+    function working(xml) {
+      var xmlDoc = $.parseXML(xml);
+      var name = $(xmlDoc).find('xs:element');
 
+      for (var i = 0; i < document.all.length; i++) {
 
-		//iterates through the dom depth first method
-		function iterateDOMTree(node) {
-			console.log("node: ", node);
-			// console.log("node.attributes: ", node.attributes);
-			// console.log("node.Experiment: ", node.attrib);
-			//console.log("--------------");
-			//console.log(i + ": ", node.getAttribute("name"));
-
-			for (node = node.firstElementChild; node != null; node = node.nextElementSibling) {
-				iterateDOMTree(node);
-			}
-		}
-		var xmlDoc = $.parseXML(xml);
-		// iterateDOMTree(xmlDoc);
-
-		//displaying the XML to see it visually
-		console.log(xml);
-		//parsed XML DOM
-		console.log(xmlDoc);
-		//Print the first layer(BFS method) of xmlDoc
-		var firstChildren = $(xmlDoc).children();
-		console.log(firstChildren);
-
-
-		//variable so that the first pass will ignore and not look for a parent
-		var firstPass = 0;
-		// trying to traverse a three with bredth first method (this will enter each simbling before going into depth)
-		function BFSiteration(node) {
-
-			var queue = [];
-
-			queue.push(node);
-
-
-			currentTree = queue.shift();
-			//var i = 0;
-			//var length = currentTree.children.length;
-			while (currentTree) {
-
-				for (var i = 0; i < currentTree.children.length; i++) {
-
-					var final = currentTree.children[i];
-					queue.push(final);
-					if (currentTree.nodeType == 1 && final.hasAttributes("name")) {
-						if (i == 0)
-							console.log("---")
-						//console.log(final.getAttribute("name"));
-						var braking = final.getAttribute("name");
-						//////////////////////////////////////////////////
-						/////////////////////////////////////////////////
-						//cannot find the parent of the first element because it doesnt exist we need to skip the first element
-						if (firstPass == 0) {
-							console.log("Root:", final.getAttribute("name"));
-						} else if (final.parentElement.hasAttribute("name")) {
-							console.log(final.parentElement.getAttribute("name"), final.getAttribute("name"));
-						} else if (final.parentElement.parentElement.hasAttribute("name")) {
-							console.log(final.parentElement.parentElement.getAttribute('name'), final.getAttribute("name"));
-						} else if (final.parentElement.parentElement.parentElement.hasAttribute("name")) {
-							console.log(final.parentElement.parentElement.parentElement.getAttribute('name'), final.getAttribute("name"));
-						}
-						firstPass++;
-						//////////////////////////////////////////////////
-						//////////////////////////////////////////////////
-					}
-				}
-				currentTree = queue.shift();
-			}
-		}
-
-
-		console.log("------------");
-		BFSiteration(xmlDoc);
+        //      if(document.all[i].getAttribute("name") != null ) {
+        //        if(document.all[i-1].getAttribute("name") == null){
+        //          console.log("    ");
+        //        }
+        console.log(document.all[i].getAttribute("name"));
+        // }
+      }
+    }
+    //working(xml);
+    //console.log(document.all[8]);
 
 
 
-		//bfs explanation
-		//https://code.tutsplus.com/articles/data-structures-with-javascript-tree--cms-23393
 
 
-		////////////////////////////////////////////////////////////////////////
-		//We can only get the attribute from an array this is an example of it.
-		// var element = xmlDoc.getElementsByTagName("xs:element");
-		//console.log(element[1].getAttribute("name"));
-		/////////////////////////////////////////////////////////////////////////
 
-	</script>
+
+
+    //iterates through the dom depth first method
+    function iterateDOMTree(node) {
+      console.log("node: ", node);
+      // console.log("node.attributes: ", node.attributes);
+      // console.log("node.Experiment: ", node.attrib);
+      //console.log("--------------");
+      //console.log(i + ": ", node.getAttribute("name"));
+
+      for (node = node.firstElementChild; node != null; node = node.nextElementSibling) {
+        iterateDOMTree(node);
+      }
+    }
+    var xmlDoc = $.parseXML(xml);
+    // iterateDOMTree(xmlDoc);
+
+    //displaying the XML to see it visually
+    console.log(xml);
+    //parsed XML DOM
+    console.log(xmlDoc);
+    //Print the first layer(BFS method) of xmlDoc
+    var firstChildren = $(xmlDoc).children();
+    console.log(firstChildren);
+
+
+    //variable so that the first pass will ignore and not look for a parent
+    var firstPass = 0;
+    // trying to traverse a three with bredth first method (this will enter each simbling before going into depth)
+    function BFSiteration(node) {
+
+      var queue = [];
+
+      queue.push(node);
+
+
+      currentTree = queue.shift();
+      //var i = 0;
+      //var length = currentTree.children.length;
+      while (currentTree) {
+
+        for (var i = 0; i < currentTree.children.length; i++) {
+
+          var final = currentTree.children[i];
+          queue.push(final);
+          if (currentTree.nodeType == 1 && final.hasAttributes("name")) {
+            if (i == 0)
+              console.log("---")
+            //console.log(final.getAttribute("name"));
+
+            var braking = final.getAttribute("name");
+            //////////////////////////////////////////////////
+            /////////////////////////////////////////////////
+            //cannot find the parent of the first element because it doesnt exist we need to skip the first element
+            if (firstPass == 0) {
+              console.log("Root:", final.getAttribute("name"));
+            } else if (final.parentElement.hasAttribute("name")) {
+              console.log(final.parentElement.getAttribute("name"), final.getAttribute("name"));
+            } else if (final.parentElement.parentElement.hasAttribute("name")) {
+              console.log(final.parentElement.parentElement.getAttribute('name'), final.getAttribute("name"));
+            } else if (final.parentElement.parentElement.parentElement.hasAttribute("name")) {
+              console.log(final.parentElement.parentElement.parentElement.getAttribute('name'), final.getAttribute("name"));
+            }
+            firstPass++;
+            //////////////////////////////////////////////////
+            //////////////////////////////////////////////////
+          }
+        }
+        currentTree = queue.shift();
+      }
+    }
+
+
+    console.log("------------");
+    BFSiteration(xmlDoc);
+
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //bfs explanation
+    //https://code.tutsplus.com/articles/data-structures-with-javascript-tree--cms-23393
+    /////////////////////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////////
+    //We can only get the attribute from an array this is an example of it.
+    // var element = xmlDoc.getElementsByTagName("xs:element");
+    //console.log(element[1].getAttribute("name"));
+    /////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////
+    //Making JSON object example;
+    console.log("------Making JSON object-----------");
+    var obj = new Object();
+    obj.cars = {};
+    obj.cars.audi = [];
+    obj.cars.audi[0] = "A4";
+    obj.cars.audi[1] = "A5";
+    obj.cars.audi[2] = "A6";
+    obj.cars.audi[3] = "A7";
+
+    obj.cars.bmw = [];
+    obj.cars.bmw[0] = "B4";
+    obj.cars.bmw[1] = "B5";
+    obj.cars.bmw[2] = "B6";
+    obj.cars.bmw[3] = "B7";
+
+    obj.cars.merc = [];
+    obj.cars.merc[0] = "C1";
+    obj.cars.merc[1] = "C2";
+    obj.cars.merc[2] = "C3";
+    obj.cars.merc[3] = "C4";
+
+    console.log("this is me ", obj.cars.audi);
+
+
+
+
+
+    var carString = JSON.stringify(obj);
+    console.log(carString);
+    ///////////////////////////////////////////////////////////
+
+
+
+    /* What to work on next
+    
+      1. Figure out how to get the parent element inside a while loop.
+      2. Constract a json hierarchy with the structure of the parent/child relationship that is being right now printed out in the console
+    
+    
+    
+    */
+
+  </script>
 
 
 </body>
