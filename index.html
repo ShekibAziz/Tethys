@@ -8,6 +8,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
   <title>Tethys</title>
   <style>
     html,
@@ -39,6 +40,29 @@
       height: 90%;
     }
 
+    svg {
+      border: 1px solid silver;
+    }
+
+    .node {
+      cursor: pointer;
+    }
+
+    .node circle {
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+
+    .link {
+      fill: none;
+      stroke: lightgray;
+      stroke-width: 1.5px;
+    }
+
+    #treeStructureBox {
+      font: 11px sans-serif;
+    }
+
   </style>
 </head>
 
@@ -51,24 +75,26 @@
   <!--Second Small navbar Page.(Schema tree structure)(show all collapse all search)   -->
   <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
     <div class="dropdown">
-      <button class="btn btn-info btn-outline-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">XML Schemas</button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Calibrations</a>
-        <a class="dropdown-item" href="#">Common Elements</a>
-        <a class="dropdown-item" href="#">Deployment</a>
-        <a class="dropdown-item" href="#">Detections.v1_2</a>
-        <a class="dropdown-item" href="#">Detections</a>
-        <a class="dropdown-item" href="#">Ensemble</a>
-        <a class="dropdown-item" href="#">Events</a>
-        <a class="dropdown-item" href="#">Itis</a>
-        <a class="dropdown-item" href="#">Localization</a>
-        <a class="dropdown-item" href="#">New Deployment</a>
-        <a class="dropdown-item" href="#">Species Abbreviations</a>
-        <a class="dropdown-item" href="#">Tethys</a>
-        <a class="dropdown-item" href="#">Tethys Schema Project</a>
-        <a class="dropdown-item" href="#">Transfer Function</a>
-      </div>
+      <select id="schemaSelector" class="btn btn-info btn-outline-primary btn-sm custom-select">
+        <option value="0">Select a Schema</option>
+        <option value="1">Calibrations</option>
+        <option value="2">Deployment</option>
+        <option value="3">Detections.v1_2</option>
+        <option value="4">Detections</option>
+        <option value="5">Ensemble</option>
+        <option value="6">Events</option>
+        <option value="7">Itis</option>
+        <option value="8">Localization</option>
+        <option value="9">New Deployment</option>
+        <option value="10">Species Abbreviations</option>
+        <option value="11">Tethys</option>
+        <option value="12">Tethys Schema Project</option>
+        <option value="13">Transfer Function</option>
+      </select>
     </div>
+
+    <!--    form-->
+
     <div class="">
 
 
@@ -83,11 +109,10 @@
 
 
   <!--  Space for the Tree structure -->
-  
-<div id="treeStructureBox" class="border border-primary">
-  <h3>I'm a future Tree</h3>
-  <iframe height="300px" width="100%" src="http://xmlgrid.net/view/xsdViewer.html"></iframe>
-</div>
+
+  <div id="treeStructureBox" class="border border-primary">
+    <h3>Please Select a Schema</h3>
+  </div>
 
   <!-- Space for the query refiner   -->
   <div id="queryRefinerBox" class="border border-primary">
@@ -100,20 +125,220 @@
 
 
   <script>
-    //Keeps the selected XML schema as the selected dropdown option 
-    $(function() {
+    $(document).ready(function() {
+      console.log("Im Jquery and Im working");
 
-      $(".dropdown-menu a").click(function() {
+      $('#schemaSelector').on('change', function() {
+        var selectedVal = $(this).val();
+        if (selectedVal == 0) {
+          $('#treeStructureBox').html("<h3>Please Select a Schema</h3>");
+          console.log("0");
+        } else if (selectedVal == 1) {
+          $('#treeStructureBox').html("");
+          console.log("1");
+          something("1");
+        } else if (selectedVal == 2) {
+          $('#treeStructureBox').html("");
+          console.log("2");
+          something("2");
+        } else {
+          $('#treeStructureBox').html("");
+          console.log("You hit the else statements");
+          $('#treeStructureBox').html("<h3>Else statement</h3>");
+        }
+      })
 
-        $(".btn:first-child").text($(this).text());
-        $(".btn:first-child").val($(this).text());
+      //D3 begins
+      function something() {
+        var json = {
+          "name": "ShipOrder",
+          "children": [{
+              "name": "Orderperson",
+              "type": "xs:string",
+            },
+            {
+              "name": "Shipto",
+              "children": [{
+                "name": "name",
+                "type": "xs:string"
+              }, {
+                "name": "address",
+                "type": "xs:string"
+              }, {
+                "name": "city",
+                "type": "xs:string"
+              }, {
+                "name": "country",
+                "type": "xs:string"
+              }, ]
+            },
+            {
+              "name": "item",
+              "children": [{
+                "name": "title",
+                "type": "xs:string"
+              }, {
+                "name": "note",
+                "type": "xs:string"
+              }, {
+                "name": "quanityt",
+                "type": "xs:positiveInteger"
+              }, {
+                "name": "price",
+                "type": "xs:decimal"
+              }, ]
+            },
+            {
+              "name": "orderid",
+              "type": "xs:string"
+            }
+          ]
+        };
 
-      });
-    });
-    //?????????????????????????????????????????????????????????????????????????????????????????????Not working
-    // Load only a selected section of a page
- $(document).ready(function() { console.log("----------------------------hello 1----------------------------"); $('#info').onload('http://xmlgrid.net div#section1'); console.log("++++++++++++++++++++++++++++hello 2++++++++++++++++++++++++++++"); });
-    //?????????????????????????????????????????????????????????????????????????????????????????????Not working 
+        var width = 700;
+        var height = 650;
+        var maxLabel = 150;
+        var duration = 500;
+        var radius = 5;
+
+        var i = 0;
+        var root;
+
+        var tree = d3.layout.tree().size([height, width]);
+
+        var diagonal = d3.svg.diagonal().projection(function(d) {
+            return [d.y, d.x];
+          }
+
+        );
+
+        var svg = d3.select("#treeStructureBox").append("svg").attr("width", "100%").attr("height", "100%").append("g").attr("transform", "translate(" + maxLabel + ",0)");
+
+        root = json;
+        root.x0 = height / 2;
+        root.y0 = 0;
+
+        root.children.forEach(collapse);
+
+        function update(source) {
+          // Compute the new tree layout.
+          var nodes = tree.nodes(root).reverse();
+          var links = tree.links(nodes); // Normalize for fixed-depth.
+          nodes.forEach(function(d) {
+            d.y = d.depth * maxLabel;
+          }); // Update the nodes…
+          var node = svg.selectAll("g.node").data(nodes, function(d) {
+            return d.id || (d.id = ++i);
+          }); // Enter any new nodes at the parent's previous position.
+          var nodeEnter = node.enter().append("g").attr("class", "node").attr("transform", function(d) {
+            return "translate(" + source.y0 + "," + source.x0 + ")";
+          }).on("click", click);
+
+          nodeEnter.append("circle").attr("r", 0).style("fill", function(d) {
+            return d._children ? "lightsteelblue" : "white";
+          });
+
+          nodeEnter.append("text").attr("x", function(d) {
+            var spacing = computeRadius(d) + 5;
+            return d.children || d._children ? -spacing : spacing;
+          }).attr("dy", "3").attr("text-anchor", function(d) {
+            return d.children || d._children ? "end" : "start";
+          }).text(function(d) {
+            if (d.type) return d.name + " : " + d.type;
+            else return d.name;
+          }).style("fill-opacity", 0); // Transition nodes to their new position.
+          var nodeUpdate = node.transition().duration(duration).attr("transform", function(d) {
+            return "translate(" + d.y + "," + d.x + ")";
+          });
+
+          nodeUpdate.select("circle").attr("r", function(d) {
+            return computeRadius(d);
+          }).style("fill", function(d) {
+            return d._children ? "lightsteelblue" : "#fff";
+          });
+
+          nodeUpdate.select("text").style("fill-opacity", 1); // Transition exiting nodes to the parent's new position.
+          var nodeExit = node.exit().transition().duration(duration).attr("transform", function(d) {
+            return "translate(" + source.y + "," + source.x + ")";
+          }).remove();
+
+          nodeExit.select("circle").attr("r", 0);
+          nodeExit.select("text").style("fill-opacity", 0); // Update the links…
+          var link = svg.selectAll("path.link").data(links, function(d) {
+            return d.target.id;
+          }); // Enter any new links at the parent's previous position.
+          link.enter().insert("path", "g").attr("class", "link").attr("d", function(d) {
+            var o = {
+              x: source.x0,
+              y: source.y0
+            };
+            return diagonal({
+              source: o,
+              target: o
+            });
+          }); // Transition links to their new position.
+          link.transition().duration(duration).attr("d", diagonal); // Transition exiting nodes to the parent's new position.
+          link.exit().transition().duration(duration).attr("d", function(d) {
+            var o = {
+              x: source.x,
+              y: source.y
+            };
+            return diagonal({
+              source: o,
+              target: o
+            });
+          }).remove(); // Stash the old positions for transition.
+          nodes.forEach(function(d) {
+            d.x0 = d.x;
+            d.y0 = d.y;
+          });
+        }
+
+        function computeRadius(d) {
+          if (d.children || d._children) return radius + (radius * nbEndNodes(d) / 10);
+          else return radius;
+        }
+
+        function nbEndNodes(n) {
+          nb = 0;
+          if (n.children) {
+            n.children.forEach(function(c) {
+              nb += nbEndNodes(c);
+            });
+          } else if (n._children) {
+            n._children.forEach(function(c) {
+              nb += nbEndNodes(c);
+            });
+          } else nb++;
+
+          return nb;
+        }
+
+        function click(d) {
+          if (d.children) {
+            d._children = d.children;
+            d.children = null;
+          } else {
+            d.children = d._children;
+            d._children = null;
+          }
+          update(d);
+        }
+
+        function collapse(d) {
+          if (d.children) {
+            d._children = d.children;
+            d._children.forEach(collapse);
+            d.children = null;
+          }
+        }
+        update(root);
+      }
+
+      //D3 ends
+
+    }); //document.Ready
+
 
 
 
