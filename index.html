@@ -252,55 +252,99 @@
             }
           ]
         };
-        var json2 = {
-          "name": "2222ShipOrder",
+        var deployment = {
+          "name": "Deployment",
           "children": [{
-              "name": "222Orderperson",
-              "type": "22xs:string",
-            },
-            {
-              "name": "22Shipto",
+            "name": "Common Elements",
+            "children": [{
+              "name": "Description Type",
+              "comment": "Text based description of process",
               "children": [{
-                "name": "22name",
-                "type": "22xs:string"
-              }, {
-                "name": "22address",
-                "type": "xs:string"
-              }, {
-                "name": "city",
-                "type": "xs:string"
-              }, {
-                "name": "country",
-                "type": "xs:string"
-              }, ]
-            },
-            {
-              "name": "item",
+                "name": "Sequence",
+                "children": [{
+                  "name": "Objectives",
+                  "type": "string",
+                  "comment": "What are the objectives of this effort?  Examples: Beamform to increase SNR for detection. Detect every click of a rare species. Verify data quality."
+                }, {
+                  "name": "Abstract",
+                  "type": "string",
+                  "comment": "Overview of effort"
+                }, {
+                  "name": "Method",
+                  "type": "string",
+                  "comment": "High-level description of the method used"
+                }]
+              }]
+
+            }, {
+              "name": "Data Source Type",
+              "comment": "Indicates the deployment or ensemble from which the process (e.g detector) derived information",
               "children": [{
-                "name": "title",
-                "type": "xs:string"
-              }, {
-                "name": "note",
-                "type": "xs:string"
-              }, {
-                "name": "quanityt",
-                "type": "xs:positiveInteger"
-              }, {
-                "name": "price",
-                "type": "xs:decimal"
+                "name": "choice",
+                "children": [{
+                  "name": "Ensemble Name",
+                  "comment": "Name of a group of instruments being used together for a common purpose (e.g. large aperture array).  The Name will correspond to an instance in the Ensemble collection.",
+                  type: "string"
+                }, {
+                  "name": "Sequence",
+                  comment: "Information that identifies a specific deployment within the Deployment collection.",
+                  "children": [{
+                    "name": "Project",
+                    "type": "string"
+                  }, {
+                    "name": "Deployment",
+                    "type": "integer"
+                  }, {
+                    "name": "Choice",
+                    "children": [{
+                      "name": "Site",
+                      "type": "string"
+                    }, {
+                      "name": "Cruise",
+                      "type": "string"
+                    }]
+                  }]
+                }]
               }, ]
-            },
-            {
-              "name": "orderid",
-              "type": "xs:string"
-            }
-          ]
+            }, {
+              "name": "Algorithm Type",
+              "comment": "Description of detection algorithm",
+              "children": [{
+                "name": "Method",
+                "comment": "Text based description of algorithm or citation",
+                "type": "string"
+
+              }]
+            }]
+          }, {
+            "name": "Deployment",
+          }, {
+            "name": "Generic Sensor",
+          }, {
+            "name": "Unknown Sensor",
+          }, {
+            "name": "Audio",
+          }, {
+            "name": "Channel Info",
+          }, {
+            "name": "Deployment Recovery Details"
+          }, {
+            "name": "Accoustic Data QA Type"
+          }, {
+            "name": "Path Element Type"
+          }]
         };
+
+
+
+
+
+
         var json3 = {
-          "name": "333ShipOrder",
+          "name": "3ShipOrder",
           "children": [{
-              "name": "333Orderperson",
-              "type": "333xs:string",
+              "name": "3Orderperson",
+              "type": "3xs:string",
             },
             {
               "name": "333Shipto",
@@ -364,7 +408,7 @@
         if (Value == 1) {
           root = json1;
         } else if (Value == 2) {
-          root = json2;
+          root = deployment;
         } else if (Value == 3) {
           root = json3;
         } else if (Value == 4) {
@@ -408,7 +452,9 @@
           }).attr("dy", "3").attr("text-anchor", function(d) {
             return d.children || d._children ? "end" : "start";
           }).text(function(d) {
+            //if (d.type && d.comment) return d.name + " : " + d.type + " : " + d.comment;
             if (d.type) return d.name + " : " + d.type;
+            //else if (d.comment) return d.name + " : " + d.comment;
             else return d.name;
           }).style("fill-opacity", 0); // Transition nodes to their new position.
           var nodeUpdate = node.transition().duration(duration).attr("transform", function(d) {
