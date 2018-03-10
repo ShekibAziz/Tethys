@@ -255,93 +255,73 @@
         var deployment = {
           "name": "Deployment",
           "children": [{
-            "name": "Common Elements",
-            "children": [{
-              "name": "Description Type",
-              "comment": "Text based description of process",
+              "name": "Common Elements",
               "children": [{
-                "name": "Sequence",
-                "children": [{
-                  "name": "Objectives",
-                  "type": "string",
-                  "comment": "What are the objectives of this effort?  Examples: Beamform to increase SNR for detection. Detect every click of a rare species. Verify data quality."
-                }, {
-                  "name": "Abstract",
-                  "type": "string",
-                  "comment": "Overview of effort"
-                }, {
-                  "name": "Method",
-                  "type": "string",
-                  "comment": "High-level description of the method used"
-                }]
-              }]
-
-            }, {
-              "name": "Data Source Type",
-              "comment": "Indicates the deployment or ensemble from which the process (e.g detector) derived information",
-              "children": [{
-                "name": "choice",
-                "children": [{
-                  "name": "Ensemble Name",
-                  "comment": "Name of a group of instruments being used together for a common purpose (e.g. large aperture array).  The Name will correspond to an instance in the Ensemble collection.",
-                  type: "string"
-                }, {
-                  "name": "Sequence",
-                  comment: "Information that identifies a specific deployment within the Deployment collection.",
+                  "name": "Description Type",
+                  "comment": "Text based description of process",
                   "children": [{
-                    "name": "Project",
-                    "type": "string"
-                  }, {
-                    "name": "Deployment",
-                    "type": "integer"
-                  }, {
-                    "name": "Choice",
+                    "name": "Sequence",
                     "children": [{
-                      "name": "Site",
-                      "type": "string"
+                      "name": "Objectives",
+                      "type": "string",
+                      "comment": "What are the objectives of this effort?  Examples: Beamform to increase SNR for detection. Detect every click of a rare species. Verify data quality."
                     }, {
-                      "name": "Cruise",
-                      "type": "string"
+                      "name": "Abstract",
+                      "type": "string",
+                      "comment": "Overview of effort"
+                    }, {
+                      "name": "Method",
+                      "type": "string",
+                      "comment": "High-level description of the method used"
                     }]
                   }]
-                }]
-              }, ]
-            }, {
-              "name": "Algorithm Type",
-              "comment": "Description of detection algorithm",
-              "children": [{
-                "name": "Method",
-                "comment": "Text based description of algorithm or citation",
-                "type": "string"
 
-              }, {
-                "name": "Software",
-                "comment": "Name of software that implements the algorithm.  This might be the name of a plug-in or extension module that is part of a larger program or system.",
-                "type": "string"
-              }, {
-                "name": "Version",
-                "type": "string",
-                "comment": "Software version identifier"
-              }, {
-                "name": "Parameters",
-                "comment": "Structured tags to describe parameters used in algorithm execution.",
-                "children": [{
-                  "name": "Sequence",
+                }, {
+                  "name": "Data Source Type",
+                  "comment": "Indicates the deployment or ensemble from which the process (e.g detector) derived information",
                   "children": [{
-                    "name": "##any"
-                  }]
-                }]
-              }, {
-                "name": "Support Software",
-                "comment": "Software required in addition to the algorithm itself, e.g. Matlab, Ishmael, XBAT, Triton, etc.",
-                "children": [{
-                  "name": "Sequence",
+                    "name": "choice",
+                    "children": [{
+                      "name": "Ensemble Name",
+                      "comment": "Name of a group of instruments being used together for a common purpose (e.g. large aperture array).  The Name will correspond to an instance in the Ensemble collection.",
+                      type: "string"
+                    }, {
+                      "name": "Sequence",
+                      comment: "Information that identifies a specific deployment within the Deployment collection.",
+                      "children": [{
+                        "name": "Project",
+                        "type": "string"
+                      }, {
+                        "name": "Deployment",
+                        "type": "integer"
+                      }, {
+                        "name": "Choice",
+                        "children": [{
+                          "name": "Site",
+                          "type": "string"
+                        }, {
+                          "name": "Cruise",
+                          "type": "string"
+                        }]
+                      }]
+                    }]
+                  }, ]
+                }, {
+                  "name": "Algorithm Type",
+                  "comment": "Description of detection algorithm",
                   "children": [{
+                    "name": "Method",
+                    "comment": "Text based description of algorithm or citation",
+                    "type": "string"
+
+                  }, {
                     "name": "Software",
+                    "comment": "Name of software that implements the algorithm.  This might be the name of a plug-in or extension module that is part of a larger program or system.",
                     "type": "string"
                   }, {
                     "name": "Version",
-                    "type": "string"
+                    "type": "string",
+                    "comment": "Software version identifier"
                   }, {
                     "name": "Parameters",
                     "comment": "Structured tags to describe parameters used in algorithm execution.",
@@ -351,130 +331,339 @@
                         "name": "##any"
                       }]
                     }]
-                  }]
-
-                }]
-              }]
-            }, {
-              "name": "Quality Assurance Process Type",
-              "children": [{
-                "name": "Sequence",
-                "children": [{
-                  "name": "Description",
-                  "children": [{
-                    "name": "Sequence",
-                    "comment": "Text based description of process.",
+                  }, {
+                    "name": "Support Software",
+                    "comment": "Software required in addition to the algorithm itself, e.g. Matlab, Ishmael, XBAT, Triton, etc.",
                     "children": [{
-                      "name": "Objectives",
-                      "type": "string",
-                      "comment": "What are the objectives of this effort?  Examples: Beamform to increase SNR for detection. Detect every click of a rare species. Verify data quality.",
-                    }, {
-                      "name": "Abstract",
-                      "type": "string",
-                      "comment": "Overview of effort.",
-                    }, {
-                      "name": "Method",
-                      "type": "string",
-                      "comment": "High-level description of the method used.",
+                      "name": "Sequence",
+                      "children": [{
+                        "name": "Software",
+                        "type": "string"
+                      }, {
+                        "name": "Version",
+                        "type": "string"
+                      }, {
+                        "name": "Parameters",
+                        "comment": "Structured tags to describe parameters used in algorithm execution.",
+                        "children": [{
+                          "name": "Sequence",
+                          "children": [{
+                            "name": "##any"
+                          }]
+                        }]
+                      }]
+
                     }]
                   }]
                 }, {
-                  "name": "Responsible Party",
-                  "comment": "based on ISO 19115",
+                  "name": "Quality Assurance Process Type",
+                  "children": [{
+                    "name": "Sequence",
+                    "children": [{
+                      "name": "Description",
+                      "children": [{
+                        "name": "Sequence",
+                        "comment": "Text based description of process.",
+                        "children": [{
+                          "name": "Objectives",
+                          "type": "string",
+                          "comment": "What are the objectives of this effort?  Examples: Beamform to increase SNR for detection. Detect every click of a rare species. Verify data quality.",
+                        }, {
+                          "name": "Abstract",
+                          "type": "string",
+                          "comment": "Overview of effort.",
+                        }, {
+                          "name": "Method",
+                          "type": "string",
+                          "comment": "High-level description of the method used.",
+                        }]
+                      }]
+                    }, {
+                      "name": "Responsible Party",
+                      "comment": "based on ISO 19115",
+                      "children": [{
+                        "name": "Attributes",
+                        "children": [{
+                          "name": "id",
+                          "type": "NCName",
+                          "comment": "Handle to external database"
+                        }]
+                      }, {
+                        "name": "Sequence",
+                        "children": [{
+                          "name": "Individual Name",
+                          "type": "string"
+                        }, {
+                          "name": "Organization Name",
+                          "type": "string"
+                        }, {
+                          "name": "Position Name",
+                          "type": "string"
+                        }, {
+                          "name": "Contact Info",
+                          "children": [{
+                            "name": "Phone",
+                            "children": [{
+                              "name": "Sequence",
+                              "children": [{
+                                "name": "Voice",
+                                "type": "string"
+                              }, {
+                                "name": "Facsimile",
+                                "type": "string"
+                              }]
+                            }]
+                          }, {
+                            "name": "Address",
+                            "children": [{
+                              "name": "Sequence",
+                              "children": [{
+                                "name": "Delivery Point",
+                                "type": "string"
+                              }, {
+                                "name": "City",
+                                "type": "string"
+                              }, {
+                                "name": "Administrative Area",
+                                "type": "string"
+                              }, {
+                                "name": "Postal Code",
+                                "type": "string"
+                              }, {
+                                "name": "Country",
+                                "type": "string"
+                              }, {
+                                "name": "Electronic Mail Address",
+                                "type": "string"
+                              }]
+                            }]
+                          }, {
+                            "name": "Online Resource",
+                            "comment": "We do not fully conform to the onlineResources of ISO 19115",
+                            "children": [{
+                              "name": "Attributes",
+                              "children": [{
+                                "name": "##Any"
+                              }]
+                            }]
+                          }, {
+                            "name": "Hours of Service",
+                            "type": "string"
+                          }, {
+                            "name": "Contact Instructions",
+                            "type": "string"
+                          }]
+                        }]
+                      }]
+                    }]
+                  }]
+                }, {
+                  "name": "Contact Group",
+                  "comment": "Contains a subset of the OpenGIS SensorML ContactGroup (http: //www.opengis.net/sensorML/1.0).  Parsing the full SensorML schema will slow down processing.",
+                  "children": [{
+                    "name": "Choice",
+                    "children": [{
+                      "name": "Person",
+                      "children": [{
+                        "name": "Attributes",
+                        "children": [{
+                          "name": "id",
+                          "comment": "Handle to external database",
+                          "type": "NCName"
+                        }]
+                      }, {
+                        "name": "Sequence",
+                        "children": [{
+                          "name": "Surname",
+                          "type": "token"
+                        }, {
+                          "name": "Name",
+                          "type": "token"
+                        }, {
+                          "name": "UserID",
+                          "type": "token"
+                        }, {
+                          "name": "Affiliation",
+                          "type": "token"
+                        }, {
+                          "name": "Phone Number",
+                          "type": "token"
+                        }, {
+                          "name": "Email",
+                          "type": "token"
+                        }]
+                      }]
+                    }, {
+                      "name": "Responsible Party",
+                      "comment": "based on ISO 19115",
+                      "children": [{
+                        "name": "Attribute",
+                        "children": [{
+                          "name": "id",
+                          "comment": "Handle to external database",
+                          "type": "NCName"
+                        }]
+                      }, {
+                        "name": "Sequence",
+                        "children": [{
+                            "name": "Individual Name",
+                            "type": "string"
+                          }, {
+                            "name": "Organization Name",
+                            "type": "string"
+                          }, {
+                            "name": "Position Name",
+                            "type": "string"
+                          },
+                          {
+                            "name": "Contact Info",
+                            "children": [{
+                              "name": "Sequence",
+                              "children": [{
+                                "name": "Phone",
+                                "children": [{
+                                  "name": "Sequence",
+                                  "children": [{
+                                    "name": "Voice",
+                                    "type": "string"
+                                  }, {
+                                    "name": "Facsimile",
+                                    "type": "string"
+                                  }]
+                                }]
+                              }, {
+                                "name": "Address",
+                                "children": [{
+                                  "name": "Sequence",
+                                  "children": [{
+                                    "name": "Delivery Point",
+                                    "type": "string"
+                                  }, {
+                                    "name": "City",
+                                    "type": "string"
+                                  }, {
+                                    "name": "Administrative Area",
+                                    "type": "string"
+                                  }, {
+                                    "name": "Postal Code",
+                                    "type": "string"
+                                  }, {
+                                    "name": "Country",
+                                    "type": "string"
+                                  }, {
+                                    "name": "Electronic Mail Address",
+                                    "type": "string"
+                                  }]
+                                }]
+                              }, {
+                                "name": "Online Resource",
+                                "comment": "We do not fully conform to the onlineResources of ISO 19115",
+                                "children": [{
+                                  "name": "Attributes",
+                                  "children": [{
+                                    "name": "##Any"
+                                  }]
+                                }]
+                              }, {
+                                "name": "Hours of Service",
+                                "type": "string"
+                              }, {
+                                "name": "Contact Instructions",
+                                "type": "string"
+                              }]
+                            }]
+
+                          }
+                        ]
+                      }]
+                    }]
+                  }]
+                }, {
+                  "name": "Person",
                   "children": [{
                     "name": "Attributes",
                     "children": [{
                       "name": "id",
-                      "type": "NCName",
-                      "comment": "Handle to external database"
+                      "comment": "Handle to external database",
+                      "type": "NCName"
                     }]
                   }, {
                     "name": "Sequence",
                     "children": [{
-                      "name": "Individual Name",
-                      "type": "string"
+                      "name": "Surname",
+                      "type": "token"
                     }, {
-                      "name": "Organization Name",
-                      "type": "string"
+                      "name": "Name",
+                      "type": "token"
                     }, {
-                      "name": "Position Name",
-                      "type": "string"
+                      "name": "UserID",
+                      "type": "token"
                     }, {
-                      "name": "Contact Info",
-                      "children": [{
-                        "name": "Phone",
-                        "children": [{
-                          "name": "Sequence",
-                          "children": [{
-                            "name": "Voice",
-                            "type": "string"
-                          }, {
-                            "name": "Facsimile",
-                            "type": "string"
-                          }]
-                        }]
-                      }, {
-                        "name": "Address",
-                        "children": [{
-                          "name": "Sequence",
-                          "children": [{
-                            "name": "Delivery Point",
-                            "type": "string"
-                          }, {
-                            "name": "City",
-                            "type": "string"
-                          }, {
-                            "name": "Administrative Area",
-                            "type": "string"
-                          }, {
-                            "name": "Postal Code",
-                            "type": "string"
-                          }, {
-                            "name": "Country",
-                            "type": "string"
-                          }, {
-                            "name": "Electronic Mail Address",
-                            "type": "string"
-                          }]
-                        }]
-                      }, {
-                        "name": "Online Resource",
-                        "comment": "We do not fully conform to the onlineResources of ISO 19115",
-                        "children": [{
-                          "name": "Attributes",
-                          "children": [{
-                            "name": "##Any"
-                          }]
-                        }]
-                      }, {
-                        "name": "Hours of Service",
-                        "type": "string"
-                      }, {
-                        "name": "Contact Instructions",
-                        "type": "string"
-                      }]
+                      "name": "Affiliation",
+                      "type": "token"
+                    }, {
+                      "name": "Phone Number",
+                      "type": "token"
+                    }, {
+                      "name": "Email",
+                      "type": "token"
                     }]
                   }]
-                }]
-              }]
-            }]
-          }, {
-            "name": "Deployment",
-          }, {
-            "name": "Generic Sensor",
-          }, {
-            "name": "Unknown Sensor",
-          }, {
-            "name": "Audio",
-          }, {
-            "name": "Channel Info",
-          }, {
-            "name": "Deployment Recovery Details"
-          }, {
-            "name": "Accoustic Data QA Type"
-          }, {
-            "name": "Path Element Type"
-          }]
+                },
+                {
+                  "name": "Responsible Party"
+                },
+                {
+                  "name": "Contact Info"
+                },
+                {
+                  "name": "Long Lat"
+                },
+                {
+                  "name": "Long Lat3"
+                },
+                {
+                  "name": "SpeciesID Type"
+                },
+                {
+                  "name": "Call Type"
+                },
+                {
+                  "name": "Event Type"
+                },
+                {
+                  "name": "Bearing Deg"
+                },
+                {
+                  "name": "MetaData Info"
+                }
+              ]
+            },
+            {
+              "name": "Deployment",
+            },
+            {
+              "name": "Generic Sensor",
+            },
+            {
+              "name": "Unknown Sensor",
+            },
+            {
+              "name": "Audio",
+            },
+            {
+              "name": "Channel Info",
+            },
+            {
+              "name": "Deployment Recovery Details"
+            },
+            {
+              "name": "Accoustic Data QA Type"
+            },
+            {
+              "name": "Path Element Type"
+            }
+          ]
         };
 
 
