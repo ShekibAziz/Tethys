@@ -402,59 +402,63 @@
                         }, {
                           "name": "Contact Info",
                           "children": [{
-                            "name": "Phone",
+                            "name": "Sequence",
                             "children": [{
-                              "name": "Sequence",
+                              "name": "Phone",
                               "children": [{
-                                "name": "Voice",
-                                "type": "string"
-                              }, {
-                                "name": "Facsimile",
-                                "type": "string"
+                                "name": "Sequence",
+                                "children": [{
+                                  "name": "Voice",
+                                  "type": "string"
+                                }, {
+                                  "name": "Facsimile",
+                                  "type": "string"
+                                }]
                               }]
-                            }]
-                          }, {
-                            "name": "Address",
-                            "children": [{
-                              "name": "Sequence",
+                            }, {
+                              "name": "Address",
                               "children": [{
-                                "name": "Delivery Point",
-                                "type": "string"
-                              }, {
-                                "name": "City",
-                                "type": "string"
-                              }, {
-                                "name": "Administrative Area",
-                                "type": "string"
-                              }, {
-                                "name": "Postal Code",
-                                "type": "string"
-                              }, {
-                                "name": "Country",
-                                "type": "string"
-                              }, {
-                                "name": "Electronic Mail Address",
-                                "type": "string"
+                                "name": "Sequence",
+                                "children": [{
+                                  "name": "Delivery Point",
+                                  "type": "string"
+                                }, {
+                                  "name": "City",
+                                  "type": "string"
+                                }, {
+                                  "name": "Administrative Area",
+                                  "type": "string"
+                                }, {
+                                  "name": "Postal Code",
+                                  "type": "string"
+                                }, {
+                                  "name": "Country",
+                                  "type": "string"
+                                }, {
+                                  "name": "Electronic Mail Address",
+                                  "type": "string"
+                                }]
                               }]
-                            }]
-                          }, {
-                            "name": "Online Resource",
-                            "comment": "We do not fully conform to the onlineResources of ISO 19115",
-                            "children": [{
-                              "name": "Attributes",
+                            }, {
+                              "name": "Online Resource",
+                              "comment": "We do not fully conform to the onlineResources of ISO 19115",
                               "children": [{
-                                "name": "##Any"
+                                "name": "Attributes",
+                                "children": [{
+                                  "name": "##Any"
+                                }]
                               }]
+                            }, {
+                              "name": "Hours of Service",
+                              "type": "string"
+                            }, {
+                              "name": "Contact Instructions",
+                              "type": "string"
                             }]
-                          }, {
-                            "name": "Hours of Service",
-                            "type": "string"
-                          }, {
-                            "name": "Contact Instructions",
-                            "type": "string"
                           }]
                         }]
                       }]
+
                     }]
                   }]
                 }, {
@@ -611,31 +615,307 @@
                   }]
                 },
                 {
-                  "name": "Responsible Party"
+                  "name": "Responsible Party",
+                  "comment": "based on ISO 19115",
+                  "children": [{
+                    "name": "Attributes",
+                    "children": [{
+                      "name": "id",
+                      "type": "NCName",
+                      "comment": "Handle to external database"
+                    }]
+                  }, {
+                    "name": "Sequence",
+                    "children": [{
+                      "name": "Individual Name",
+                      "type": "string"
+                    }, {
+                      "name": "Organization Name",
+                      "type": "string"
+                    }, {
+                      "name": "Position Name",
+                      "type": "string"
+                    }, {
+                      "name": "Contact Info",
+                      "children": [{
+                        "name": "Sequence",
+                        "children": [{
+                          "name": "Phone",
+                          "children": [{
+                            "name": "Sequence",
+                            "children": [{
+                              "name": "Voice",
+                              "type": "string"
+                            }, {
+                              "name": "Facsimile",
+                              "type": "string"
+                            }]
+                          }]
+                        }, {
+                          "name": "Address",
+                          "children": [{
+                            "name": "Sequence",
+                            "children": [{
+                              "name": "Delivery Point",
+                              "type": "string"
+                            }, {
+                              "name": "City",
+                              "type": "string"
+                            }, {
+                              "name": "Administrative Area",
+                              "type": "string"
+                            }, {
+                              "name": "Postal Code",
+                              "type": "string"
+                            }, {
+                              "name": "Country",
+                              "type": "string"
+                            }, {
+                              "name": "Electronic Mail Address",
+                              "type": "string"
+                            }]
+                          }]
+                        }, {
+                          "name": "Online Resource",
+                          "comment": "We do not fully conform to the onlineResources of ISO 19115",
+                          "children": [{
+                            "name": "Attributes",
+                            "children": [{
+                              "name": "##Any"
+                            }]
+                          }]
+                        }, {
+                          "name": "Hours of Service",
+                          "type": "string"
+                        }, {
+                          "name": "Contact Instructions",
+                          "type": "string"
+                        }]
+                      }]
+                    }]
+                  }]
+
                 },
                 {
-                  "name": "Contact Info"
+                  "name": "Contact Info",
+                  "children": [{
+                    "name": "Sequence",
+                    "children": [{
+                      "name": "Phone",
+                      "children": [{
+                        "name": "Sequence",
+                        "children": [{
+                          "name": "Voice",
+                          "type": "string"
+                        }, {
+                          "name": "Facsimile",
+                          "type": "string"
+                        }]
+                      }]
+                    }, {
+                      "name": "Address",
+                      "children": [{
+                        "name": "Sequence",
+                        "children": [{
+                          "name": "Delivery Point",
+                          "type": "string"
+                        }, {
+                          "name": "City",
+                          "type": "string"
+                        }, {
+                          "name": "Administrative Area",
+                          "type": "string"
+                        }, {
+                          "name": "Postal Code",
+                          "type": "string"
+                        }, {
+                          "name": "Country",
+                          "type": "string"
+                        }, {
+                          "name": "Electronic Mail Address",
+                          "type": "string"
+                        }]
+                      }]
+                    }, {
+                      "name": "Online Resource",
+                      "comment": "We do not fully conform to the onlineResources of ISO 19115",
+                      "children": [{
+                        "name": "Attributes",
+                        "children": [{
+                          "name": "##Any"
+                        }]
+                      }]
+                    }, {
+                      "name": "Hours of Service",
+                      "type": "string"
+                    }, {
+                      "name": "Contact Instructions",
+                      "type": "string"
+                    }]
+                  }]
                 },
                 {
-                  "name": "Long Lat"
+                  "name": "Long Lat",
+                  "comment": "Spherical reference system",
+                  "children": [{
+                    "name": "Sequence",
+                    "children": [{
+                      "name": "Longitude",
+                      "type": "double",
+                      "comment": "Expressed in degrees East [0, 360)"
+                    }, {
+                      "name": "Latitude",
+                      "type": "double",
+                      "comment": "Expressed in degrees North [-90, 90]"
+                    }]
+                  }]
                 },
                 {
-                  "name": "Long Lat3"
+                  "name": "Long Lat3",
+                  "children": [{
+                    "name": "Sequence",
+                    "children": [{
+                      "name": "Longitude",
+                      "type": "double",
+                      "comment": "Expressed in degrees East [0, 360)"
+                    }, {
+                      "name": "Latitude",
+                      "type": "double",
+                      "comment": "Expressed in degrees North [-90, 90]"
+                    }, {
+                      "name": "Altitude_m",
+                      "type": "double",
+                      "comment": "Optional altitude (negative for depth) in meters"
+                    }]
+                  }]
                 },
                 {
-                  "name": "SpeciesID Type"
+                  "name": "SpeciesID Type",
+                  "comment": "Integrated Taxonomic Information System species identifier http://www.itis.gov/ for positive numbers.Negative numbers are interpreted by collection('phenomena').",
+                  "type": "string",
+                  "children": [{
+                    "name": "Attributes",
+                    "children": [{
+                      "name": "Group",
+                      "type": "string"
+                    }]
+                  }]
                 },
                 {
-                  "name": "Call Type"
+                  "name": "Call Type",
+                  "comment": "Description of a call",
+                  "type": "string",
+                  "children": [{
+                    "name": "Attributes",
+                    "children": [{
+                      "name": "SybType",
+                      "type": "string"
+                    }]
+                  }]
                 },
                 {
-                  "name": "Event Type"
+                  "name": "Event Type",
+                  "comment": "Event identifier.  Optional tag typically in ISO datetime format YYYY-MM-DDTHH:MM:SSZ identifying this event uniquely within the stream (detections, localizations, etc.).For human analysts,it is typical to use the time at which the detection was made.When used, the combination of the event and attributes that uniquely identify the set of detections(or document name) must be unique.",
+                  "type": "string"
                 },
                 {
-                  "name": "Bearing Deg"
+                  "name": "Bearing Deg",
+                  "type": "double"
                 },
                 {
-                  "name": "MetaData Info"
+                  "name": "MetaData Info",
+                  "comment": "Information about who is responsible for this metadata record, when it was created, and how often it is updated.",
+                  "children": [{
+                    "name": "Sequences",
+                    "children": [{
+                      "name": "Responsible Party",
+                      "comment": "based on ISO 19115",
+                      "children": [{
+                        "name": "Attributes",
+                        "children": [{
+                          "name": "id",
+                          "type": "NCName",
+                          "comment": "Handle to external database"
+                        }]
+                      }, {
+                        "name": "Sequence",
+                        "children": [{
+                          "name": "Individual Name",
+                          "type": "string"
+                        }, {
+                          "name": "Organization Name",
+                          "type": "string"
+                        }, {
+                          "name": "Position Name",
+                          "type": "string"
+                        }, {
+                          "name": "Contact Info",
+                          "children": [{
+                            "name": "Sequence",
+                            "children": [{
+                              "name": "Phone",
+                              "children": [{
+                                "name": "Sequence",
+                                "children": [{
+                                  "name": "Voice",
+                                  "type": "string"
+                                }, {
+                                  "name": "Facsimile",
+                                  "type": "string"
+                                }]
+                              }]
+                            }, {
+                              "name": "Address",
+                              "children": [{
+                                "name": "Sequence",
+                                "children": [{
+                                  "name": "Delivery Point",
+                                  "type": "string"
+                                }, {
+                                  "name": "City",
+                                  "type": "string"
+                                }, {
+                                  "name": "Administrative Area",
+                                  "type": "string"
+                                }, {
+                                  "name": "Postal Code",
+                                  "type": "string"
+                                }, {
+                                  "name": "Country",
+                                  "type": "string"
+                                }, {
+                                  "name": "Electronic Mail Address",
+                                  "type": "string"
+                                }]
+                              }]
+                            }, {
+                              "name": "Online Resource",
+                              "comment": "We do not fully conform to the onlineResources of ISO 19115",
+                              "children": [{
+                                "name": "Attributes",
+                                "children": [{
+                                  "name": "##Any"
+                                }]
+                              }]
+                            }, {
+                              "name": "Hours of Service",
+                              "type": "string"
+                            }, {
+                              "name": "Contact Instructions",
+                              "type": "string"
+                            }]
+                          }]
+                        }]
+                      }]
+
+                    }, {
+                      "name": "Date",
+                      "type": "dateTime"
+                    }, {
+                      "name": "Update Frequency",
+                      "type": "string"
+                    }]
+                  }]
                 }
               ]
             },
