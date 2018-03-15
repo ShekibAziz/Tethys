@@ -60,7 +60,7 @@
     }
 
     #treeStructureBox {
-      font-size: 10px;
+      font-size: 10.5px;
     }
 
   </style>
@@ -99,7 +99,7 @@
 
 
       <form class="form-inline justify-content-end">
-        <button type="button" class="mr-sm-1 btn btn-sm btn-dark">Show All</button>
+        <button id="showAll" type="button" class="mr-sm-1 btn btn-sm btn-dark">Show All</button>
         <button type="button" class="mr-sm-1 btn btn-sm btn-dark">Collapse All</button>
         <input class="form-control btn-sm mr-sm-1" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -1732,13 +1732,145 @@
                     "name": "Sequence",
                     "children": [{
                       "name": "Audio",
-                      "children": ""
+                      "children": [{
+                        "name": "Sequence",
+                        "children": [{
+                          "name": "Generic Sensor",
+                          "children": [{
+                            "name": "Sequence",
+                            "children": [{
+                              "name": "Number",
+                              "type": "integer"
+                            }, {
+                              "name": "SensorID",
+                              "type": "string"
+                            }, {
+                              "name": "Geomtry",
+                              "comment": "Geometry relative to platform",
+                              "children": [{
+                                "name": "Choice",
+                                "children": [{
+                                  "name": "x_m",
+                                  "type": "double"
+                                }, {
+                                  "name": "y_m",
+                                  "type": "double"
+                                }, {
+                                  "name": "z_m",
+                                  "type": "double"
+                                }]
+                              }]
+                            }, {
+                              "name": "Name",
+                              "comment": "Optional sensor name",
+                              "type": "string"
+                            }, {
+                              "name": "Description",
+                              "comment": "Optional description of sensor",
+                              "type": "string"
+                            }]
+                          }]
+                        }, {
+                          "name": "Sequence",
+                          "children": [{
+                            "name": "HydrophoneID",
+                            "type": "string"
+                          }, {
+                            "name": "PreampID",
+                            "type": "string"
+                          }]
+                        }]
+                      }]
                     }, {
                       "name": "Depth",
-                      "children": ""
+                      "children": [{
+                        "name": "Generic Sensor",
+                        "children": [{
+                          "name": "Sequence",
+                          "children": [{
+                            "name": "Number",
+                            "type": "integer"
+                          }, {
+                            "name": "SensorID",
+                            "type": "string"
+                          }, {
+                            "name": "Geomtry",
+                            "comment": "Geometry relative to platform",
+                            "children": [{
+                              "name": "Choice",
+                              "children": [{
+                                "name": "x_m",
+                                "type": "double"
+                              }, {
+                                "name": "y_m",
+                                "type": "double"
+                              }, {
+                                "name": "z_m",
+                                "type": "double"
+                              }]
+                            }]
+                          }, {
+                            "name": "Name",
+                            "comment": "Optional sensor name",
+                            "type": "string"
+                          }, {
+                            "name": "Description",
+                            "comment": "Optional description of sensor",
+                            "type": "string"
+                          }]
+                        }]
+                      }]
                     }, {
-                      "name": "Sensor++++++++",
-                      "children": ""
+                      "name": "Sensor",
+                      "children": [{
+                        "name": "Sequence",
+                        "children": [{
+                          "name": "Generic Sensor",
+                          "children": [{
+                            "name": "Sequence",
+                            "children": [{
+                              "name": "Number",
+                              "type": "integer"
+                            }, {
+                              "name": "SensorID",
+                              "type": "string"
+                            }, {
+                              "name": "Geomtry",
+                              "comment": "Geometry relative to platform",
+                              "children": [{
+                                "name": "Choice",
+                                "children": [{
+                                  "name": "x_m",
+                                  "type": "double"
+                                }, {
+                                  "name": "y_m",
+                                  "type": "double"
+                                }, {
+                                  "name": "z_m",
+                                  "type": "double"
+                                }]
+                              }]
+                            }, {
+                              "name": "Name",
+                              "comment": "Optional sensor name",
+                              "type": "string"
+                            }, {
+                              "name": "Description",
+                              "comment": "Optional description of sensor",
+                              "type": "string"
+                            }]
+                          }]
+                        }]
+                      }, {
+                        "name": "Sequence",
+                        "children": [{
+                          "name": "Type",
+                          "type": "string"
+                        }, {
+                          "name": "Properties",
+                          "type": "##any"
+                        }]
+                      }]
                     }]
                   }]
 
@@ -2384,24 +2516,47 @@
           ]
         };
 
+
+
+        var margin = {
+          top: 350,
+          right: 50,
+          bottom: 50,
+          left: 150
+        }
         var width = 700;
         var height = 650;
+        var horizontalSeparationBetweenNodes = 0;
+        var verticalSeparationBetweenNodes = 28;
         var maxLabel = 150;
         var duration = 500;
-        var radius = 5;
+        var radius = 2;
 
         var i = 0;
         var root;
 
-        var tree = d3.layout.tree().size([height, width]);
+
+
+        //so the tree braches dont overlap
+        var tree = d3.layout.tree()
+          //.size([height, width])
+          .nodeSize([30, ])
+          .separation(function separation(a, b) {
+            return a.parent == b.parent ? 2 : 1;
+          });
+
+
 
         var diagonal = d3.svg.diagonal().projection(function(d) {
-            return [d.y, d.x];
-          }
+          return [d.y, d.x];
+        });
 
-        );
-
-        var svg = d3.select("#treeStructureBox").append("svg").attr("width", "100%").attr("height", "100%").append("g").attr("transform", "translate(" + maxLabel + ",0)");
+        var svg = d3.select("#treeStructureBox").append("svg").attr("width", "100%").attr("height", "100%")
+          .call(d3.behavior.zoom().on("zoom", function() { //zoom effect part and panning
+            svg.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
+          }))
+          .append("g")
+          .attr("transform", "translate(" + (margin.left + width / 4) + "," + margin.top + ")");;
 
         //??????????????????????????????????????????????????????????????
         if (Value == 1) {
@@ -2442,7 +2597,7 @@
           }).on("click", click);
 
           nodeEnter.append("circle").attr("r", 0).style("fill", function(d) {
-            return d._children ? "lightsteelblue" : "white";
+            return d._children ? "green" : "white";
           });
 
           nodeEnter.append("text").attr("x", function(d) {
@@ -2463,7 +2618,7 @@
           nodeUpdate.select("circle").attr("r", function(d) {
             return computeRadius(d);
           }).style("fill", function(d) {
-            return d._children ? "lightsteelblue" : "#fff";
+            return d._children ? "green" : "#fff";
           });
 
           nodeUpdate.select("text").style("fill-opacity", 1); // Transition exiting nodes to the parent's new position.
@@ -2545,6 +2700,19 @@
       }
 
       //D3 ends
+
+
+
+
+
+
+
+
+
+      /*Open all nodes when Show all is clicked */
+
+
+
 
     }); //document.Ready
 
