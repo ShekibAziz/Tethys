@@ -1,0 +1,2213 @@
+ {
+   "name": "Deployment",
+   "children": [{
+       "name": "Common Elements",
+       "children": [{
+           "name": "Description Type",
+           "comment": "Text based description of process",
+           "children": [{
+             "name": "Sequence",
+             "children": [{
+               "name": "Objectives",
+               "type": "string",
+               "comment": "What are the objectives of this effort?  Examples: Beamform to increase SNR for detection. Detect every click of a rare species. Verify data quality."
+                }, {
+               "name": "Abstract",
+               "type": "string",
+               "comment": "Overview of effort"
+                }, {
+               "name": "Method",
+               "type": "string",
+               "comment": "High-level description of the method used"
+                }]
+              }]
+
+            }, {
+           "name": "Data Source Type",
+           "comment": "Indicates the deployment or ensemble from which the process (e.g detector) derived information",
+           "children": [{
+             "name": "choice",
+             "children": [{
+               "name": "Ensemble Name",
+               "comment": "Name of a group of instruments being used together for a common purpose (e.g. large aperture array).  The Name will correspond to an instance in the Ensemble collection.",
+               "type": "string"
+                }, {
+               "name": "Sequence",
+               "comment": "Information that identifies a specific deployment within the Deployment collection.",
+               "children": [{
+                 "name": "Project",
+                 "type": "string"
+                  }, {
+                 "name": "Deployment",
+                 "type": "integer"
+                  }, {
+                 "name": "Choice",
+                 "children": [{
+                   "name": "Site",
+                   "type": "string"
+                    }, {
+                   "name": "Cruise",
+                   "type": "string"
+                    }]
+                  }]
+                }]
+              }]
+            }, {
+           "name": "Algorithm Type",
+           "comment": "Description of detection algorithm",
+           "children": [{
+             "name": "Method",
+             "comment": "Text based description of algorithm or citation",
+             "type": "string"
+
+              }, {
+             "name": "Software",
+             "comment": "Name of software that implements the algorithm.  This might be the name of a plug-in or extension module that is part of a larger program or system.",
+             "type": "string"
+              }, {
+             "name": "Version",
+             "type": "string",
+             "comment": "Software version identifier"
+              }, {
+             "name": "Parameters",
+             "comment": "Structured tags to describe parameters used in algorithm execution.",
+             "children": [{
+               "name": "Sequence",
+               "children": [{
+                 "name": "##any"
+                  }]
+                }]
+              }, {
+             "name": "Support Software",
+             "comment": "Software required in addition to the algorithm itself, e.g. Matlab, Ishmael, XBAT, Triton, etc.",
+             "children": [{
+               "name": "Sequence",
+               "children": [{
+                 "name": "Software",
+                 "type": "string"
+                  }, {
+                 "name": "Version",
+                 "type": "string"
+                  }, {
+                 "name": "Parameters",
+                 "comment": "Structured tags to describe parameters used in algorithm execution.",
+                 "children": [{
+                   "name": "Sequence",
+                   "children": [{
+                     "name": "##any"
+                      }]
+                    }]
+                  }]
+
+                }]
+              }]
+            }, {
+           "name": "Quality Assurance Process Type",
+           "children": [{
+             "name": "Sequence",
+             "children": [{
+               "name": "Description",
+               "children": [{
+                 "name": "Sequence",
+                 "comment": "Text based description of process.",
+                 "children": [{
+                   "name": "Objectives",
+                   "type": "string",
+                   "comment": "What are the objectives of this effort?  Examples: Beamform to increase SNR for detection. Detect every click of a rare species. Verify data quality."
+                    }, {
+                   "name": "Abstract",
+                   "type": "string",
+                   "comment": "Overview of effort."
+                    }, {
+                   "name": "Method",
+                   "type": "string",
+                   "comment": "High-level description of the method used."
+                    }]
+                  }]
+                }, {
+               "name": "Responsible Party",
+               "comment": "based on ISO 19115",
+               "children": [{
+                 "name": "Attributes",
+                 "children": [{
+                   "name": "id",
+                   "type": "NCName",
+                   "comment": "Handle to external database"
+                    }]
+                  }, {
+                 "name": "Sequence",
+                 "children": [{
+                   "name": "Individual Name",
+                   "type": "string"
+                    }, {
+                   "name": "Organization Name",
+                   "type": "string"
+                    }, {
+                   "name": "Position Name",
+                   "type": "string"
+                    }, {
+                   "name": "Contact Info",
+                   "children": [{
+                     "name": "Sequence",
+                     "children": [{
+                       "name": "Phone",
+                       "children": [{
+                         "name": "Sequence",
+                         "children": [{
+                           "name": "Voice",
+                           "type": "string"
+                            }, {
+                           "name": "Facsimile",
+                           "type": "string"
+                            }]
+                          }]
+                        }, {
+                       "name": "Address",
+                       "children": [{
+                         "name": "Sequence",
+                         "children": [{
+                           "name": "Delivery Point",
+                           "type": "string"
+                            }, {
+                           "name": "City",
+                           "type": "string"
+                            }, {
+                           "name": "Administrative Area",
+                           "type": "string"
+                            }, {
+                           "name": "Postal Code",
+                           "type": "string"
+                            }, {
+                           "name": "Country",
+                           "type": "string"
+                            }, {
+                           "name": "Electronic Mail Address",
+                           "type": "string"
+                            }]
+                          }]
+                        }, {
+                       "name": "Online Resource",
+                       "comment": "We do not fully conform to the onlineResources of ISO 19115",
+                       "children": [{
+                         "name": "Attributes",
+                         "children": [{
+                           "name": "##Any"
+                            }]
+                          }]
+                        }, {
+                       "name": "Hours of Service",
+                       "type": "string"
+                        }, {
+                       "name": "Contact Instructions",
+                       "type": "string"
+                        }]
+                      }]
+                    }]
+                  }]
+
+                }]
+              }]
+            }, {
+           "name": "Contact Group",
+           "comment": "Contains a subset of the OpenGIS SensorML ContactGroup (http: //www.opengis.net/sensorML/1.0).  Parsing the full SensorML schema will slow down processing.",
+           "children": [{
+             "name": "Choice",
+             "children": [{
+               "name": "Person",
+               "children": [{
+                 "name": "Attributes",
+                 "children": [{
+                   "name": "id",
+                   "comment": "Handle to external database",
+                   "type": "NCName"
+                    }]
+                  }, {
+                 "name": "Sequence",
+                 "children": [{
+                   "name": "Surname",
+                   "type": "token"
+                    }, {
+                   "name": "Name",
+                   "type": "token"
+                    }, {
+                   "name": "UserID",
+                   "type": "token"
+                    }, {
+                   "name": "Affiliation",
+                   "type": "token"
+                    }, {
+                   "name": "Phone Number",
+                   "type": "token"
+                    }, {
+                   "name": "Email",
+                   "type": "token"
+                    }]
+                  }]
+                }, {
+               "name": "Responsible Party",
+               "comment": "based on ISO 19115",
+               "children": [{
+                 "name": "Attribute",
+                 "children": [{
+                   "name": "id",
+                   "comment": "Handle to external database",
+                   "type": "NCName"
+                    }]
+                  }, {
+                 "name": "Sequence",
+                 "children": [{
+                     "name": "Individual Name",
+                     "type": "string"
+                      }, {
+                     "name": "Organization Name",
+                     "type": "string"
+                      }, {
+                     "name": "Position Name",
+                     "type": "string"
+                      },
+                   {
+                     "name": "Contact Info",
+                     "children": [{
+                       "name": "Sequence",
+                       "children": [{
+                         "name": "Phone",
+                         "children": [{
+                           "name": "Sequence",
+                           "children": [{
+                             "name": "Voice",
+                             "type": "string"
+                              }, {
+                             "name": "Facsimile",
+                             "type": "string"
+                              }]
+                            }]
+                          }, {
+                         "name": "Address",
+                         "children": [{
+                           "name": "Sequence",
+                           "children": [{
+                             "name": "Delivery Point",
+                             "type": "string"
+                              }, {
+                             "name": "City",
+                             "type": "string"
+                              }, {
+                             "name": "Administrative Area",
+                             "type": "string"
+                              }, {
+                             "name": "Postal Code",
+                             "type": "string"
+                              }, {
+                             "name": "Country",
+                             "type": "string"
+                              }, {
+                             "name": "Electronic Mail Address",
+                             "type": "string"
+                              }]
+                            }]
+                          }, {
+                         "name": "Online Resource",
+                         "comment": "We do not fully conform to the onlineResources of ISO 19115",
+                         "children": [{
+                           "name": "Attributes",
+                           "children": [{
+                             "name": "##Any"
+                              }]
+                            }]
+                          }, {
+                         "name": "Hours of Service",
+                         "type": "string"
+                          }, {
+                         "name": "Contact Instructions",
+                         "type": "string"
+                          }]
+                        }]
+
+                      }
+                    ]
+                  }]
+                }]
+              }]
+            }, {
+           "name": "Person",
+           "children": [{
+             "name": "Attributes",
+             "children": [{
+               "name": "id",
+               "comment": "Handle to external database",
+               "type": "NCName"
+                }]
+              }, {
+             "name": "Sequence",
+             "children": [{
+               "name": "Surname",
+               "type": "token"
+                }, {
+               "name": "Name",
+               "type": "token"
+                }, {
+               "name": "UserID",
+               "type": "token"
+                }, {
+               "name": "Affiliation",
+               "type": "token"
+                }, {
+               "name": "Phone Number",
+               "type": "token"
+                }, {
+               "name": "Email",
+               "type": "token"
+                }]
+              }]
+            },
+         {
+           "name": "Responsible Party",
+           "comment": "based on ISO 19115",
+           "children": [{
+             "name": "Attributes",
+             "children": [{
+               "name": "id",
+               "type": "NCName",
+               "comment": "Handle to external database"
+                }]
+              }, {
+             "name": "Sequence",
+             "children": [{
+               "name": "Individual Name",
+               "type": "string"
+                }, {
+               "name": "Organization Name",
+               "type": "string"
+                }, {
+               "name": "Position Name",
+               "type": "string"
+                }, {
+               "name": "Contact Info",
+               "children": [{
+                 "name": "Sequence",
+                 "children": [{
+                   "name": "Phone",
+                   "children": [{
+                     "name": "Sequence",
+                     "children": [{
+                       "name": "Voice",
+                       "type": "string"
+                        }, {
+                       "name": "Facsimile",
+                       "type": "string"
+                        }]
+                      }]
+                    }, {
+                   "name": "Address",
+                   "children": [{
+                     "name": "Sequence",
+                     "children": [{
+                       "name": "Delivery Point",
+                       "type": "string"
+                        }, {
+                       "name": "City",
+                       "type": "string"
+                        }, {
+                       "name": "Administrative Area",
+                       "type": "string"
+                        }, {
+                       "name": "Postal Code",
+                       "type": "string"
+                        }, {
+                       "name": "Country",
+                       "type": "string"
+                        }, {
+                       "name": "Electronic Mail Address",
+                       "type": "string"
+                        }]
+                      }]
+                    }, {
+                   "name": "Online Resource",
+                   "comment": "We do not fully conform to the onlineResources of ISO 19115",
+                   "children": [{
+                     "name": "Attributes",
+                     "children": [{
+                       "name": "##Any"
+                        }]
+                      }]
+                    }, {
+                   "name": "Hours of Service",
+                   "type": "string"
+                    }, {
+                   "name": "Contact Instructions",
+                   "type": "string"
+                    }]
+                  }]
+                }]
+              }]
+
+            },
+         {
+           "name": "Contact Info",
+           "children": [{
+             "name": "Sequence",
+             "children": [{
+               "name": "Phone",
+               "children": [{
+                 "name": "Sequence",
+                 "children": [{
+                   "name": "Voice",
+                   "type": "string"
+                    }, {
+                   "name": "Facsimile",
+                   "type": "string"
+                    }]
+                  }]
+                }, {
+               "name": "Address",
+               "children": [{
+                 "name": "Sequence",
+                 "children": [{
+                   "name": "Delivery Point",
+                   "type": "string"
+                    }, {
+                   "name": "City",
+                   "type": "string"
+                    }, {
+                   "name": "Administrative Area",
+                   "type": "string"
+                    }, {
+                   "name": "Postal Code",
+                   "type": "string"
+                    }, {
+                   "name": "Country",
+                   "type": "string"
+                    }, {
+                   "name": "Electronic Mail Address",
+                   "type": "string"
+                    }]
+                  }]
+                }, {
+               "name": "Online Resource",
+               "comment": "We do not fully conform to the onlineResources of ISO 19115",
+               "children": [{
+                 "name": "Attributes",
+                 "children": [{
+                   "name": "##Any"
+                    }]
+                  }]
+                }, {
+               "name": "Hours of Service",
+               "type": "string"
+                }, {
+               "name": "Contact Instructions",
+               "type": "string"
+                }]
+              }]
+            },
+         {
+           "name": "Long Lat",
+           "comment": "Spherical reference system",
+           "children": [{
+             "name": "Sequence",
+             "children": [{
+               "name": "Longitude",
+               "type": "double",
+               "comment": "Expressed in degrees East [0, 360)"
+                }, {
+               "name": "Latitude",
+               "type": "double",
+               "comment": "Expressed in degrees North [-90, 90]"
+                }]
+              }]
+            },
+         {
+           "name": "Long Lat3",
+           "children": [{
+             "name": "Sequence",
+             "children": [{
+               "name": "Longitude",
+               "type": "double",
+               "comment": "Expressed in degrees East [0, 360)"
+                }, {
+               "name": "Latitude",
+               "type": "double",
+               "comment": "Expressed in degrees North [-90, 90]"
+                }, {
+               "name": "Altitude_m",
+               "type": "double",
+               "comment": "Optional altitude (negative for depth) in meters"
+                }]
+              }]
+            },
+         {
+           "name": "SpeciesID Type",
+           "comment": "Integrated Taxonomic Information System species identifier http://www.itis.gov/ for positive numbers.Negative numbers are interpreted by collection('phenomena').",
+           "type": "string",
+           "children": [{
+             "name": "Attributes",
+             "children": [{
+               "name": "Group",
+               "type": "string"
+                }]
+              }]
+            },
+         {
+           "name": "Call Type",
+           "comment": "Description of a call",
+           "type": "string",
+           "children": [{
+             "name": "Attributes",
+             "children": [{
+               "name": "SybType",
+               "type": "string"
+                }]
+              }]
+            },
+         {
+           "name": "Event Type",
+           "comment": "Event identifier.  Optional tag typically in ISO datetime format YYYY-MM-DDTHH:MM:SSZ identifying this event uniquely within the stream (detections, localizations, etc.).For human analysts,it is typical to use the time at which the detection was made.When used, the combination of the event and attributes that uniquely identify the set of detections(or document name) must be unique.",
+           "type": "string"
+            },
+         {
+           "name": "Bearing Deg",
+           "type": "double"
+            },
+         {
+           "name": "MetaData Info",
+           "comment": "Information about who is responsible for this metadata record, when it was created, and how often it is updated.",
+           "children": [{
+             "name": "Sequences",
+             "children": [{
+               "name": "Responsible Party",
+               "comment": "based on ISO 19115",
+               "children": [{
+                 "name": "Attributes",
+                 "children": [{
+                   "name": "id",
+                   "type": "NCName",
+                   "comment": "Handle to external database"
+                    }]
+                  }, {
+                 "name": "Sequence",
+                 "children": [{
+                   "name": "Individual Name",
+                   "type": "string"
+                    }, {
+                   "name": "Organization Name",
+                   "type": "string"
+                    }, {
+                   "name": "Position Name",
+                   "type": "string"
+                    }, {
+                   "name": "Contact Info",
+                   "children": [{
+                     "name": "Sequence",
+                     "children": [{
+                       "name": "Phone",
+                       "children": [{
+                         "name": "Sequence",
+                         "children": [{
+                           "name": "Voice",
+                           "type": "string"
+                            }, {
+                           "name": "Facsimile",
+                           "type": "string"
+                            }]
+                          }]
+                        }, {
+                       "name": "Address",
+                       "children": [{
+                         "name": "Sequence",
+                         "children": [{
+                           "name": "Delivery Point",
+                           "type": "string"
+                            }, {
+                           "name": "City",
+                           "type": "string"
+                            }, {
+                           "name": "Administrative Area",
+                           "type": "string"
+                            }, {
+                           "name": "Postal Code",
+                           "type": "string"
+                            }, {
+                           "name": "Country",
+                           "type": "string"
+                            }, {
+                           "name": "Electronic Mail Address",
+                           "type": "string"
+                            }]
+                          }]
+                        }, {
+                       "name": "Online Resource",
+                       "comment": "We do not fully conform to the onlineResources of ISO 19115",
+                       "children": [{
+                         "name": "Attributes",
+                         "children": [{
+                           "name": "##Any"
+                            }]
+                          }]
+                        }, {
+                       "name": "Hours of Service",
+                       "type": "string"
+                        }, {
+                       "name": "Contact Instructions",
+                       "type": "string"
+                        }]
+                      }]
+                    }]
+                  }]
+
+                }, {
+               "name": "Date",
+               "type": "dateTime"
+                }, {
+               "name": "Update Frequency",
+               "type": "string"
+                }]
+              }]
+            }
+          ]
+        },
+     {
+       "name": "Deployment",
+       "children": [{
+         "name": "Sequence",
+         "children": [{
+           "name": "Project",
+           "type": "string",
+           "comment": "Name of project associated with this deployment.  Can be related to a geographic region, funding source, etc."
+            }, {
+           "name": "DeploymentID",
+           "type": "int",
+           "comment": "Deployment identifier, a number related to either the Nth deployment operation in a series of deployments or the Nth deployment at a specific site."
+            }, {
+           "name": "Deployment Alias",
+           "type": "string",
+           "comment": "Alternative deployment description."
+            }, {
+           "name": "Choice",
+           "comment": "Deployment must be associated with a site or a cruise",
+           "children": [{
+             "name": "Sequence",
+             "children": [{
+               "name": "Site",
+               "type": "string",
+               "comment": "Name for current location"
+                }, {
+               "name": "Cruise",
+               "type": "string",
+               "comment": "Name og deployment cruise"
+                }, {
+               "name": "Site Aliases",
+               "children": [{
+                 "name": "Sequence",
+                 "children": [{
+                   "name": "Site",
+                   "type": "string"
+                    }]
+                  }],
+               "comment": "Alternative names for the deployment location"
+                }]
+              }, {
+             "name": "Cruise",
+             "type": "string",
+             "comment": "Name of deployment cruise"
+              }]
+            }, {
+           "name": "Platform",
+           "type": "string",
+           "comment": "On what platform is the instrument deployed? (e.g. mooring, tag)"
+            }, {
+           "name": "Region",
+           "type": "string",
+           "comment": "Name of geographic Region"
+            }, {
+           "name": "Instrument",
+           "comment": "Instrument type and identifier",
+           "children": [{
+             "name": "Type",
+             "type": "string",
+             "comment": "Instrument type, e.g. HARP, EAR, Popup, DMON, etc."
+              }, {
+             "name": "ID",
+             "type": "string",
+             "comment": "Instrument identifier, e.g. serial number"
+              }]
+            }, {
+           "name": "Sampling Details",
+           "comment": "Information about recordings on each channel. Sample rate, quantization bits, etc.",
+           "children": [{
+             "name": "Sequence",
+             "children": [{
+               "name": "Channel",
+               "children": [{
+                 "name": "Channel Number",
+                 "type": "nonNegativeInteger",
+                 "comment": "Channels and sensors are bound together from Start to End.  While not enforced, we assume channels are numbered from 1 to N."
+
+                  }, {
+                 "name": "Sensor Number",
+                 "type": "int",
+                 "comment": "Audio sensor index within Sensors element"
+                  }, {
+                 "name": "Start",
+                 "type": "dateTime"
+
+                  }, {
+                 "name": "End",
+                 "type": "dateTime"
+                  }, {
+                 "name": "Sampling",
+                 "comment": "Sampling rate and quantization may change over time",
+                 "children": [{
+                   "name": "Sequence",
+                   "children": [{
+                     "name": "Regimen",
+                     "comment": "Sampling regimen may change over time.  Each entry shows the start of a sampling configuration.",
+                     "children": [{
+                       "name": "Sequence",
+                       "children": [{
+                         "name": "Time Stamp",
+                         "type": "dateTime"
+                          }, {
+                         "name": "Sample Rate_kHz",
+                         "type": "double"
+                          }, {
+                         "name": "Sample Bits",
+                         "type": "int"
+                          }]
+                        }]
+                      }]
+                    }]
+
+                  }, {
+                 "name": "Gain",
+                 "comment": "Initial gain setting (assumed 0 if not populated) and any subsequent changes.",
+                 "children": [{
+                   "name": "Sequence",
+                   "children": [{
+                     "name": "Regimen",
+                     "children": [{
+                       "name": "Sequence",
+                       "children": [{
+                         "name": "Time Stamp",
+                         "type": "dateTime"
+                          }, {
+                         "name": "choice",
+                         "children": [{
+                           "name": "Gain_dB",
+                           "type": "double"
+                            }, {
+                           "name": "Gain_rel",
+                           "type": "double",
+                           "comment": "Only used if gain is not calibrated.  Relative gain may be a number on a dial."
+                            }]
+                          }]
+                        }]
+                      }]
+                    }]
+
+                  }, {
+                 "name": "Duty Cycle",
+                 "comment": "Duty cycle is represented by the recording duration and the interval from the start of one recording session to the next.  A duration of 3 m and an interval of 5 m would represent a 60% duty cycle, 3 m on, 2 m off.",
+                 "children": [{
+                   "name": "Sequence",
+                   "children": [{
+                     "name": "Regimen",
+                     "comment": "Duty cycling regimen may change over time.  Each entry shows the start of a duty cycle configuration.  The abscence of entries indicates continuous sampling as would having equal values in RecordingDuration_m and RecordingInterval_m.",
+                     "children": [{
+                       "name": "Sequence",
+                       "children": [{
+                         "name": "Time Stamp",
+                         "type": "dateTime"
+                          }, {
+                         "name": "Recording Duration_m",
+                         "type": "double"
+                          }, {
+                         "name": "Recording Interval_m",
+                         "type": "double"
+                          }]
+                        }]
+                      }]
+                    }]
+
+                  }]
+                }]
+              }]
+            }, {
+           "name": "Quality Assurance",
+           "children": [{
+             "name": "Accoustic Data QA Type",
+             "children": [{
+               "name": "Quality Assurance Process Type (extension base)",
+               "children": [{
+                 "name": "Sequence",
+                 "children": [{
+                   "name": "Description",
+                   "children": [{
+                     "name": "Description Type",
+                     "comment": "Text based description of process",
+                     "children": [{
+                       "name": "Sequence",
+                       "children": [{
+                         "name": "Objectives",
+                         "type": "string",
+                         "comment": "What are the objectives of this effort?  Examples: Beamform to increase SNR for detection. Detect every click of a rare species. Verify data quality."
+                          }, {
+                         "name": "Abstract",
+                         "type": "string",
+                         "comment": "Overview of effort"
+                          }, {
+                         "name": "Method",
+                         "type": "string",
+                         "comment": "High-level description of the method used"
+                          }]
+                        }]
+
+                      }]
+                    }, {
+                   "name": "Respomsible Party",
+                   "comment": "based on ISO 19115",
+                   "children": [{
+                     "name": "Attributes",
+                     "children": [{
+                       "name": "id",
+                       "type": "NCName",
+                       "comment": "Handle to external database"
+                        }]
+                      }, {
+                     "name": "Sequence",
+                     "children": [{
+                       "name": "Individual Name",
+                       "type": "string"
+                        }, {
+                       "name": "Organization Name",
+                       "type": "string"
+                        }, {
+                       "name": "Position Name",
+                       "type": "string"
+                        }, {
+                       "name": "Contact Info",
+                       "children": [{
+                         "name": "Sequence",
+                         "children": [{
+                           "name": "Phone",
+                           "children": [{
+                             "name": "Sequence",
+                             "children": [{
+                               "name": "Voice",
+                               "type": "string"
+                                }, {
+                               "name": "Facsimile",
+                               "type": "string"
+                                }]
+                              }]
+                            }, {
+                           "name": "Address",
+                           "children": [{
+                             "name": "Sequence",
+                             "children": [{
+                               "name": "Delivery Point",
+                               "type": "string"
+                                }, {
+                               "name": "City",
+                               "type": "string"
+                                }, {
+                               "name": "Administrative Area",
+                               "type": "string"
+                                }, {
+                               "name": "Postal Code",
+                               "type": "string"
+                                }, {
+                               "name": "Country",
+                               "type": "string"
+                                }, {
+                               "name": "Electronic Mail Address",
+                               "type": "string"
+                                }]
+                              }]
+                            }, {
+                           "name": "Online Resource",
+                           "comment": "We do not fully conform to the onlineResources of ISO 19115",
+                           "children": [{
+                             "name": "Attributes",
+                             "children": [{
+                               "name": "##Any"
+                                }]
+                              }]
+                            }, {
+                           "name": "Hours of Service",
+                           "type": "string"
+                            }, {
+                           "name": "Contact Instructions",
+                           "type": "string"
+                            }]
+                          }]
+                        }]
+                      }]
+                    }]
+                  }]
+                }, {
+               "name": "Sequence",
+               "children": [{
+                 "name": "Quality",
+                 "comment": "If no quality assurance, create an entry of Category unverified spanning the acoustic record.",
+                 "children": [{
+                   "name": "Sequence",
+                   "children": [{
+                     "name": "Start",
+                     "type": "dateTime"
+                      }, {
+                     "name": "End",
+                     "type": "dateTime"
+                      }, {
+                     "name": "Category",
+                     "type": "string",
+                     "comment": "categories: unverified, good, compromised, unusable"
+
+                      }, {
+                     "name": "Frequency Range",
+                     "comment": "QA metric applies to what frequency range?",
+                     "children": [{
+                       "name": "Sequence",
+                       "children": [{
+                         "name": "Low_Hz",
+                         "type": "double"
+                          }, {
+                         "name": "High_Hz",
+                         "type": "double"
+                          }]
+                        }]
+                      }, {
+                     "name": "Channel",
+                     "type": "integer"
+                      }, {
+                     "name": "Comment",
+                     "type": "string",
+                     "comment": "Additional qualitative information"
+
+                      }]
+                    }]
+                  }]
+
+
+
+
+                }]
+              }]
+
+            }, {
+           "name": "Data",
+           "comment": "Data from instrument, a URI is provided when not present (typical for audio).",
+           "children": [{
+             "name": "Sequence",
+             "children": [{
+               "name": "Audio",
+               "comment": "Information about audio data",
+               "children": [{
+                 "name": "Sequence",
+                 "children": [{
+                   "name": "URI",
+                   "type": "string",
+                   "comment": "Uniform Resource Indicator point to audio content."
+                    }, {
+                   "name": "Processed",
+                   "type": "string",
+                   "comment": "Pointer to location of data that has been processed (e.g. checked for quality, decimated, etc.)"
+                    }, {
+                   "name": "Raw",
+                   "type": "string",
+                   "comment": "Pointer to raw data from the instrument."
+                    }]
+                  }]
+                }, {
+               "name": "Track",
+               "comment": "A set of measurements about a ship/instrument's track line.",
+               "children": [{
+                 "name": "Sequence",
+                 "children": [{
+                   "name": "Points",
+                   "comment": "A set of sorted (by time) points associated with one or more tracklines.",
+                   "children": [{
+                     "name": "Sequence",
+                     "children": [{
+                       "name": "Trackline",
+                       "type": "double",
+                       "comment": "Optional trackline number.If unimportant,everything can be put in one Points element."
+                        }, {
+                       "name": "Point",
+                       "comment": "Timestamped measurements:  long/lat, bearing, etc. Points should be sorted by timestamp.",
+                       "children": [{
+                         "name": "Sequence",
+                         "children": [{
+                           "name": "Time Stamp",
+                           "type": "dateTime"
+                            }, {
+                           "name": "LongLat",
+                           "children": [{
+                             "name": "Sequence",
+                             "children": [{
+                               "name": "Longitube",
+                               "type": "double",
+                               "comment": "Expressed in degrees East [0, 360)"
+                                }, {
+                               "name": "Latitude",
+                               "type": "double",
+                               "comment": "Expressed in degrees North [-90, 90]"
+                                }]
+                              }],
+                           "comment": "Spherical reference system"
+                            }, {
+                           "name": "Bearing DegN",
+                           "children": [{
+                             "name": "BearingDeg",
+                             "type": "Double"
+                              }, {
+                             "name": "Attributes",
+                             "type": "Restriction of xs:String(Default magnetic)"
+                              }],
+                           "comment": "Bearing in degrees [0, 360) relative to true or magnetic north (as specified by north attribute, default magnetic)"
+                            }, {
+                           "name": "Speed_Kn",
+                           "type": "dobule",
+                           "comment": "Speed in knots"
+                            }, {
+                           "name": "Pitch_deg",
+                           "type": "Restriction of double",
+                           "comment": "Instrument pitch [0, 360) degrees"
+                            }, {
+                           "name": "Roll_deg",
+                           "type": "restriction of double",
+                           "comment": "Instrument roll [0, 360) degrees"
+                            }, {
+                           "name": "Depth_m",
+                           "type": "double",
+                           "comment": "Instrument depth in meters"
+
+                            }, {
+                           "name": "BottomDepth_m",
+                           "type": "double",
+                           "comment": "Bottom depth in meters"
+                            }]
+                          }]
+                        }]
+                      }]
+                    }, {
+                   "name": "Track Effort",
+                   "comment": "Not all measurements are associated with an instrument/ship's planned trackline (e.g. when in chase mode or transiting between tracklines).  Specify times for track effort here if needed.",
+                   "children": [{
+                     "name": "Sequence",
+                     "children": [{
+                       "name": "OnPath",
+                       "children": [{
+                         "name": "Sequence",
+                         "children": [{
+                           "name": "Path Element Type",
+                           "children": [{
+                             "name": "Trackline",
+                             "type": "double"
+                              }, {
+                             "name": "Start",
+                             "type": "dateTime"
+                              }, {
+                             "name": "End",
+                             "type": "dateTime"
+                              }, {
+                             "name": "Comment",
+                             "type": "string"
+                              }]
+                            }]
+                          }]
+                        }, {
+                       "name": "OffPath",
+                       "children": [{
+                         "name": "Sequence",
+                         "children": [{
+                           "name": "Path Element Type",
+                           "children": [{
+                             "name": "Trackline",
+                             "type": "double"
+                              }, {
+                             "name": "Start",
+                             "type": "dateTime"
+                              }, {
+                             "name": "End",
+                             "type": "dateTime"
+                              }, {
+                             "name": "Comment",
+                             "type": "string"
+                              }]
+                            }]
+                          }]
+                        }]
+                      }]
+                    }, {
+                   "name": "URI",
+                   "comment": "Pointer to trackline information.",
+                   "type": "string"
+                    }]
+                  }]
+                }]
+              }]
+            }, {
+           "name": "Deployments Details",
+           "comemnt": "Instrument deployment location, time, etc.",
+           "children": [{
+             "name": "Deployment Recovery Details",
+             "children": [{
+               "name": "Sequence",
+               "children": [{
+                 "name": "Long Lat",
+                 "comment": "Spherical reference system",
+                 "children": [{
+                   "name": "Sequence",
+                   "children": [{
+                     "name": "Longitude",
+                     "type": "double",
+                     "comment": "Expressed in degrees East [0, 360)"
+                      }, {
+                     "name": "Latitude",
+                     "type": "double",
+                     "comment": "Expressed in degrees North [-90, 90]"
+                      }]
+                    }]
+                  }, {
+                 "name": "Depth Instrument_m",
+                 "type": "double"
+                  }, {
+                 "name": "Depth Bottom_m",
+                 "type": "double"
+                  }, {
+                 "name": "Time Stamp",
+                 "type": "dateTime",
+                 "comment": "Time at which instrument was deployed/recovered.Lost instruments: set recovery time to deployment time."
+                  }, {
+                 "name": "Audio Time Stamp",
+                 "type": "dateTime ",
+                 "comment": "Recording start or end - May differ from deployment time."
+                  }, {
+                 "name": "Vessel",
+                 "type": "string"
+                  }, {
+                 "name": "Contact Group",
+                 "comment": "Contains a subset of the OpenGIS SensorML ContactGroup (http: //www.opengis.net/sensorML/1.0).  Parsing the full SensorML schema will slow down processing.",
+                 "children": [{
+                   "name": "Choice",
+                   "children": [{
+                     "name": "Person",
+                     "children": [{
+                       "name": "Attributes",
+                       "children": [{
+                         "name": "id",
+                         "comment": "Handle to external database",
+                         "type": "NCName"
+                          }]
+                        }, {
+                       "name": "Sequence",
+                       "children": [{
+                         "name": "Surname",
+                         "type": "token"
+                          }, {
+                         "name": "Name",
+                         "type": "token"
+                          }, {
+                         "name": "UserID",
+                         "type": "token"
+                          }, {
+                         "name": "Affiliation",
+                         "type": "token"
+                          }, {
+                         "name": "Phone Number",
+                         "type": "token"
+                          }, {
+                         "name": "Email",
+                         "type": "token"
+                          }]
+                        }]
+                      }, {
+                     "name": "Responsible Party",
+                     "comment": "based on ISO 19115",
+                     "children": [{
+                       "name": "Attribute",
+                       "children": [{
+                         "name": "id",
+                         "comment": "Handle to external database",
+                         "type": "NCName"
+                          }]
+                        }, {
+                       "name": "Sequence",
+                       "children": [{
+                           "name": "Individual Name",
+                           "type": "string"
+                            }, {
+                           "name": "Organization Name",
+                           "type": "string"
+                            }, {
+                           "name": "Position Name",
+                           "type": "string"
+                            },
+                         {
+                           "name": "Contact Info",
+                           "children": [{
+                             "name": "Sequence",
+                             "children": [{
+                               "name": "Phone",
+                               "children": [{
+                                 "name": "Sequence",
+                                 "children": [{
+                                   "name": "Voice",
+                                   "type": "string"
+                                    }, {
+                                   "name": "Facsimile",
+                                   "type": "string"
+                                    }]
+                                  }]
+                                }, {
+                               "name": "Address",
+                               "children": [{
+                                 "name": "Sequence",
+                                 "children": [{
+                                   "name": "Delivery Point",
+                                   "type": "string"
+                                    }, {
+                                   "name": "City",
+                                   "type": "string"
+                                    }, {
+                                   "name": "Administrative Area",
+                                   "type": "string"
+                                    }, {
+                                   "name": "Postal Code",
+                                   "type": "string"
+                                    }, {
+                                   "name": "Country",
+                                   "type": "string"
+                                    }, {
+                                   "name": "Electronic Mail Address",
+                                   "type": "string"
+                                    }]
+                                  }]
+                                }, {
+                               "name": "Online Resource",
+                               "comment": "We do not fully conform to the onlineResources of ISO 19115",
+                               "children": [{
+                                 "name": "Attributes",
+                                 "children": [{
+                                   "name": "##Any"
+                                    }]
+                                  }]
+                                }, {
+                               "name": "Hours of Service",
+                               "type": "string"
+                                }, {
+                               "name": "Contact Instructions",
+                               "type": "string"
+                                }]
+                              }]
+
+                            }
+                          ]
+                        }]
+                      }]
+                    }]
+                  }]
+                }]
+              }]
+            }, {
+           "name": "Recovery Details",
+           "comemnt": "Instrument recovery. location, time, etc.",
+           "children": [{
+             "name": "Deployment Recovery Details",
+             "children": [{
+               "name": "Sequence",
+               "children": [{
+                 "name": "Long Lat",
+                 "comment": "Spherical reference system",
+                 "children": [{
+                   "name": "Sequence",
+                   "children": [{
+                     "name": "Longitude",
+                     "type": "double",
+                     "comment": "Expressed in degrees East [0, 360)"
+                      }, {
+                     "name": "Latitude",
+                     "type": "double",
+                     "comment": "Expressed in degrees North [-90, 90]"
+                      }]
+                    }]
+                  }, {
+                 "name": "Depth Instrument_m",
+                 "type": "double"
+                  }, {
+                 "name": "Depth Bottom_m",
+                 "type": "double"
+                  }, {
+                 "name": "Time Stamp",
+                 "type": "dateTime",
+                 "comment": "Time at which instrument was deployed/recovered.Lost instruments: set recovery time to deployment time."
+                  }, {
+                 "name": "Audio Time Stamp",
+                 "type": "dateTime",
+                 "comment": "Recording start or end - May differ from deployment time."
+                  }, {
+                 "name": "Vessel",
+                 "type": "string"
+                  }, {
+                 "name": "Contact Group",
+                 "comment": "Contains a subset of the OpenGIS SensorML ContactGroup (http: //www.opengis.net/sensorML/1.0).  Parsing the full SensorML schema will slow down processing.",
+                 "children": [{
+                   "name": "Choice",
+                   "children": [{
+                     "name": "Person",
+                     "children": [{
+                       "name": "Attributes",
+                       "children": [{
+                         "name": "id",
+                         "comment": "Handle to external database",
+                         "type": "NCName"
+                          }]
+                        }, {
+                       "name": "Sequence",
+                       "children": [{
+                         "name": "Surname",
+                         "type": "token"
+                          }, {
+                         "name": "Name",
+                         "type": "token"
+                          }, {
+                         "name": "UserID",
+                         "type": "token"
+                          }, {
+                         "name": "Affiliation",
+                         "type": "token"
+                          }, {
+                         "name": "Phone Number",
+                         "type": "token"
+                          }, {
+                         "name": "Email",
+                         "type": "token"
+                          }]
+                        }]
+                      }, {
+                     "name": "Responsible Party",
+                     "comment": "based on ISO 19115",
+                     "children": [{
+                       "name": "Attribute",
+                       "children": [{
+                         "name": "id",
+                         "comment": "Handle to external database",
+                         "type": "NCName"
+                          }]
+                        }, {
+                       "name": "Sequence",
+                       "children": [{
+                           "name": "Individual Name",
+                           "type": "string"
+                            }, {
+                           "name": "Organization Name",
+                           "type": "string"
+                            }, {
+                           "name": "Position Name",
+                           "type": "string"
+                            },
+                         {
+                           "name": "Contact Info",
+                           "children": [{
+                             "name": "Sequence",
+                             "children": [{
+                               "name": "Phone",
+                               "children": [{
+                                 "name": "Sequence",
+                                 "children": [{
+                                   "name": "Voice",
+                                   "type": "string"
+                                    }, {
+                                   "name": "Facsimile",
+                                   "type": "string"
+                                    }]
+                                  }]
+                                }, {
+                               "name": "Address",
+                               "children": [{
+                                 "name": "Sequence",
+                                 "children": [{
+                                   "name": "Delivery Point",
+                                   "type": "string"
+                                    }, {
+                                   "name": "City",
+                                   "type": "string"
+                                    }, {
+                                   "name": "Administrative Area",
+                                   "type": "string"
+                                    }, {
+                                   "name": "Postal Code",
+                                   "type": "string"
+                                    }, {
+                                   "name": "Country",
+                                   "type": "string"
+                                    }, {
+                                   "name": "Electronic Mail Address",
+                                   "type": "string"
+                                    }]
+                                  }]
+                                }, {
+                               "name": "Online Resource",
+                               "comment": "We do not fully conform to the onlineResources of ISO 19115",
+                               "children": [{
+                                 "name": "Attributes",
+                                 "children": [{
+                                   "name": "##Any"
+                                    }]
+                                  }]
+                                }, {
+                               "name": "Hours of Service",
+                               "type": "string"
+                                }, {
+                               "name": "Contact Instructions",
+                               "type": "string"
+                                }]
+                              }]
+
+                            }
+                          ]
+                        }]
+                      }]
+                    }]
+                  }]
+                }]
+              }]
+            }, {
+           "name": "Sensors",
+           "children": [{
+             "name": "Sequence",
+             "children": [{
+               "name": "Audio",
+               "children": [{
+                 "name": "Sequence",
+                 "children": [{
+                   "name": "Generic Sensor",
+                   "children": [{
+                     "name": "Sequence",
+                     "children": [{
+                       "name": "Number",
+                       "type": "integer"
+                        }, {
+                       "name": "SensorID",
+                       "type": "string"
+                        }, {
+                       "name": "Geomtry",
+                       "comment": "Geometry relative to platform",
+                       "children": [{
+                         "name": "Choice",
+                         "children": [{
+                           "name": "x_m",
+                           "type": "double"
+                            }, {
+                           "name": "y_m",
+                           "type": "double"
+                            }, {
+                           "name": "z_m",
+                           "type": "double"
+                            }]
+                          }]
+                        }, {
+                       "name": "Name",
+                       "comment": "Optional sensor name",
+                       "type": "string"
+                        }, {
+                       "name": "Description",
+                       "comment": "Optional description of sensor",
+                       "type": "string"
+                        }]
+                      }]
+                    }, {
+                   "name": "Sequence",
+                   "children": [{
+                     "name": "HydrophoneID",
+                     "type": "string"
+                      }, {
+                     "name": "PreampID",
+                     "type": "string"
+                      }]
+                    }]
+                  }]
+                }, {
+               "name": "Depth",
+               "children": [{
+                 "name": "Generic Sensor",
+                 "children": [{
+                   "name": "Sequence",
+                   "children": [{
+                     "name": "Number",
+                     "type": "integer"
+                      }, {
+                     "name": "SensorID",
+                     "type": "string"
+                      }, {
+                     "name": "Geomtry",
+                     "comment": "Geometry relative to platform",
+                     "children": [{
+                       "name": "Choice",
+                       "children": [{
+                         "name": "x_m",
+                         "type": "double"
+                          }, {
+                         "name": "y_m",
+                         "type": "double"
+                          }, {
+                         "name": "z_m",
+                         "type": "double"
+                          }]
+                        }]
+                      }, {
+                     "name": "Name",
+                     "comment": "Optional sensor name",
+                     "type": "string"
+                      }, {
+                     "name": "Description",
+                     "comment": "Optional description of sensor",
+                     "type": "string"
+                      }]
+                    }]
+                  }]
+                }, {
+               "name": "Sensor",
+               "children": [{
+                 "name": "Sequence",
+                 "children": [{
+                   "name": "Generic Sensor",
+                   "children": [{
+                     "name": "Sequence",
+                     "children": [{
+                       "name": "Number",
+                       "type": "integer"
+                        }, {
+                       "name": "SensorID",
+                       "type": "string"
+                        }, {
+                       "name": "Geomtry",
+                       "comment": "Geometry relative to platform",
+                       "children": [{
+                         "name": "Choice",
+                         "children": [{
+                           "name": "x_m",
+                           "type": "double"
+                            }, {
+                           "name": "y_m",
+                           "type": "double"
+                            }, {
+                           "name": "z_m",
+                           "type": "double"
+                            }]
+                          }]
+                        }, {
+                       "name": "Name",
+                       "comment": "Optional sensor name",
+                       "type": "string"
+                        }, {
+                       "name": "Description",
+                       "comment": "Optional description of sensor",
+                       "type": "string"
+                        }]
+                      }]
+                    }]
+                  }, {
+                 "name": "Sequence",
+                 "children": [{
+                   "name": "Type",
+                   "type": "string"
+                    }, {
+                   "name": "Properties",
+                   "type": "##any"
+                    }]
+                  }]
+                }]
+              }]
+
+            }]
+          }, {
+         "name": "Constraints",
+         "children": [{
+           "name": "Deployment Key",
+           "children": [{
+             "name": "Selector"
+              }, {
+             "name": "Project"
+              }, {
+             "name": "DeploymentID"
+              }, {
+             "name": "Cite"
+              }, {
+             "name": "Cruise"
+              }]
+            }]
+
+          }]
+        },
+     {
+       "name": "Generic Sensor",
+       "children": [{
+         "name": "Sequence",
+         "children": [{
+           "name": "Number",
+           "type": "integer"
+            }, {
+           "name": "SensorID",
+           "type": "string"
+            }, {
+           "name": "Geomtry",
+           "children": [{
+             "name": "Choice",
+             "children": [{
+               "name": "x_m",
+               "type": "double"
+                }, {
+               "name": "y_m",
+               "type": "double"
+                }, {
+               "name": "z_m",
+               "type": "double"
+                }]
+              }]
+            }, {
+           "name": "Name",
+           "type": "string"
+            }, {
+           "name": "Description",
+           "type": "string"
+            }]
+          }]
+        },
+     {
+       "name": "Unknown Sensor",
+       "children": [{
+         "name": "Generic Sensor",
+         "children": [{
+           "name": "Sequence",
+           "children": [{
+             "name": "Number",
+             "type": "integer"
+              }, {
+             "name": "SensorID",
+             "type": "string"
+              }, {
+             "name": "Geomtry",
+             "children": [{
+               "name": "Choice",
+               "children": [{
+                 "name": "x_m",
+                 "type": "double"
+                  }, {
+                 "name": "y_m",
+                 "type": "double"
+                  }, {
+                 "name": "z_m",
+                 "type": "double"
+                  }]
+                }]
+              }, {
+             "name": "Name",
+             "type": "string"
+              }, {
+             "name": "Description",
+             "type": "string"
+              }]
+            }]
+          }, {
+         "name": "Sequence",
+         "children": [{
+           "name": "Type",
+           "type": "string"
+            }, {
+           "name": "Properties",
+           "children": [{
+             "name": "Sequence",
+             "children": [{
+               "name": "##any"
+                }]
+              }]
+            }]
+          }]
+        },
+     {
+       "name": "Audio",
+       "children": [{
+         "name": "Generic Sensor",
+         "children": [{
+           "name": "Sequence",
+           "children": [{
+             "name": "Number",
+             "type": "integer"
+              }, {
+             "name": "SensorID",
+             "type": "string"
+              }, {
+             "name": "Geomtry",
+             "children": [{
+               "name": "Choice",
+               "children": [{
+                 "name": "x_m",
+                 "type": "double"
+                  }, {
+                 "name": "y_m",
+                 "type": "double"
+                  }, {
+                 "name": "z_m",
+                 "type": "double"
+                  }]
+                }]
+              }, {
+             "name": "Name",
+             "type": "string"
+              }, {
+             "name": "Description",
+             "type": "string"
+              }]
+            }]
+          }, {
+         "name": "Sequence",
+         "children": [{
+           "name": "HydrophoneID",
+           "type": "string"
+            }, {
+           "name": "PreampID",
+           "type": "string"
+            }]
+          }]
+        }, {
+       "name": "Channel Info",
+       "children": [{
+         "name": "Sequence",
+         "children": [{
+           "name": "Channel",
+           "children": [{
+             "name": "Channel Number",
+             "type": "nonNegativeInteger",
+             "comment": "Channels and sensors are bound together from Start to End.  While not enforced, we assume channels are numbered from 1 to N."
+              }, {
+             "name": "Sensor Number",
+             "type": "int",
+             "comment": "Audio sensor index within Sensors element"
+              }, {
+             "name": "Start",
+             "type": "dateTime"
+
+              }, {
+             "name": "End",
+             "type": "dateTime"
+              }, {
+             "name": "Sampling",
+             "comment": "Sampling rate and quantization may change over time",
+             "children": [{
+               "name": "Sequence",
+               "children": [{
+                 "name": "Regimen",
+                 "comment": "Sampling regimen may change over time.  Each entry shows the start of a sampling configuration.",
+                 "children": [{
+                   "name": "Sequence",
+                   "children": [{
+                     "name": "Time Stamp",
+                     "type": "dateTime"
+                      }, {
+                     "name": "Sample Rate_kHz",
+                     "type": "double"
+                      }, {
+                     "name": "Sample Bits",
+                     "type": "int"
+                      }]
+                    }]
+                  }]
+                }]
+              }, {
+             "name": "Gain",
+             "comment": "Initial gain setting (assumed 0 if not populated) and any subsequent changes.",
+             "children": [{
+               "name": "Sequence",
+               "children": [{
+                 "name": "Regimen",
+                 "children": [{
+                   "name": "Sequence",
+                   "children": [{
+                     "name": "Time Stamp",
+                     "type": "dateTime"
+                      }, {
+                     "name": "choice",
+                     "children": [{
+                       "name": "Gain_dB",
+                       "type": "double"
+                        }, {
+                       "name": "Gain_rel",
+                       "type": "double",
+                       "comment": "Only used if gain is not calibrated.  Relative gain may be a number on a dial."
+                        }]
+                      }]
+                    }]
+                  }]
+                }]
+
+              }, {
+             "name": "Duty Cycle",
+             "comment": "Duty cycle is represented by the recording duration and the interval from the start of one recording session to the next.  A duration of 3 m and an interval of 5 m would represent a 60% duty cycle, 3 m on, 2 m off.",
+             "children": [{
+               "name": "Sequence",
+               "children": [{
+                 "name": "Regimen",
+                 "comment": "Duty cycling regimen may change over time.  Each entry shows the start of a duty cycle configuration.  The abscence of entries indicates continuous sampling as would having equal values in RecordingDuration_m and RecordingInterval_m.",
+                 "children": [{
+                   "name": "Sequence",
+                   "children": [{
+                     "name": "Time Stamp",
+                     "type": "dateTime"
+                      }, {
+                     "name": "Recording Duration_m",
+                     "type": "double"
+                      }, {
+                     "name": "Recording Interval_m",
+                     "type": "double"
+                      }]
+                    }]
+                  }]
+                }]
+
+              }]
+            }]
+          }]
+
+        },
+     {
+       "name": "Deployment Recovery Details",
+       "children": [{
+         "name": "Deployment Recovery Details",
+         "children": [{
+           "name": "Sequence",
+           "children": [{
+             "name": "Long Lat",
+             "comment": "Spherical reference system",
+             "children": [{
+               "name": "Sequence",
+               "children": [{
+                 "name": "Longitude",
+                 "type": "double",
+                 "comment": "Expressed in degrees East [0, 360)"
+                  }, {
+                 "name": "Latitude",
+                 "type": "double",
+                 "comment": "Expressed in degrees North [-90, 90]"
+                  }]
+                }]
+              }, {
+             "name": "Depth Instrument_m",
+             "type": "double"
+              }, {
+             "name": "Depth Bottom_m",
+             "type": "double"
+              }, {
+             "name": "Time Stamp",
+             "type": "dateTime",
+             "comment": "Time at which instrument was deployed/recovered.Lost instruments: set recovery time to deployment time."
+              }, {
+             "name": "Audio Time Stamp",
+             "type": "dateTime",
+             "comment": "Recording start or end - May differ from deployment time."
+              }, {
+             "name": "Vessel",
+             "type": "string"
+              }, {
+             "name": "Contact Group",
+             "comment": "Contains a subset of the OpenGIS SensorML ContactGroup (http: //www.opengis.net/sensorML/1.0).  Parsing the full SensorML schema will slow down processing.",
+             "children": [{
+               "name": "Choice",
+               "children": [{
+                 "name": "Person",
+                 "children": [{
+                   "name": "Attributes",
+                   "children": [{
+                     "name": "id",
+                     "comment": "Handle to external database",
+                     "type": "NCName"
+                      }]
+                    }, {
+                   "name": "Sequence",
+                   "children": [{
+                     "name": "Surname",
+                     "type": "token"
+                      }, {
+                     "name": "Name",
+                     "type": "token"
+                      }, {
+                     "name": "UserID",
+                     "type": "token"
+                      }, {
+                     "name": "Affiliation",
+                     "type": "token"
+                      }, {
+                     "name": "Phone Number",
+                     "type": "token"
+                      }, {
+                     "name": "Email",
+                     "type": "token"
+                      }]
+                    }]
+                  }, {
+                 "name": "Responsible Party",
+                 "comment": "based on ISO 19115",
+                 "children": [{
+                   "name": "Attribute",
+                   "children": [{
+                     "name": "id",
+                     "comment": "Handle to external database",
+                     "type": "NCName"
+                      }]
+                    }, {
+                   "name": "Sequence",
+                   "children": [{
+                       "name": "Individual Name",
+                       "type": "string"
+                        }, {
+                       "name": "Organization Name",
+                       "type": "string"
+                        }, {
+                       "name": "Position Name",
+                       "type": "string"
+                        },
+                     {
+                       "name": "Contact Info",
+                       "children": [{
+                         "name": "Sequence",
+                         "children": [{
+                           "name": "Phone",
+                           "children": [{
+                             "name": "Sequence",
+                             "children": [{
+                               "name": "Voice",
+                               "type": "string"
+                                }, {
+                               "name": "Facsimile",
+                               "type": "string"
+                                }]
+                              }]
+                            }, {
+                           "name": "Address",
+                           "children": [{
+                             "name": "Sequence",
+                             "children": [{
+                               "name": "Delivery Point",
+                               "type": "string"
+                                }, {
+                               "name": "City",
+                               "type": "string"
+                                }, {
+                               "name": "Administrative Area",
+                               "type": "string"
+                                }, {
+                               "name": "Postal Code",
+                               "type": "string"
+                                }, {
+                               "name": "Country",
+                               "type": "string"
+                                }, {
+                               "name": "Electronic Mail Address",
+                               "type": "string"
+                                }]
+                              }]
+                            }, {
+                           "name": "Online Resource",
+                           "comment": "We do not fully conform to the onlineResources of ISO 19115",
+                           "children": [{
+                             "name": "Attributes",
+                             "children": [{
+                               "name": "##Any"
+                                }]
+                              }]
+                            }, {
+                           "name": "Hours of Service",
+                           "type": "string"
+                            }, {
+                           "name": "Contact Instructions",
+                           "type": "string"
+                            }]
+                          }]
+
+                        }
+                      ]
+                    }]
+                  }]
+                }]
+              }]
+            }]
+          }]
+        },
+     {
+       "name": "Accoustic Data QA Type",
+       "children": [{
+         "name": "Accoustic Data QA Type",
+         "children": [{
+           "name": "Quality Assurance Process Type (extension base)",
+           "children": [{
+             "name": "Sequence",
+             "children": [{
+               "name": "Description",
+               "children": [{
+                 "name": "Description Type",
+                 "comment": "Text based description of process",
+                 "children": [{
+                   "name": "Sequence",
+                   "children": [{
+                     "name": "Objectives",
+                     "type": "string",
+                     "comment": "What are the objectives of this effort?  Examples: Beamform to increase SNR for detection. Detect every click of a rare species. Verify data quality."
+                      }, {
+                     "name": "Abstract",
+                     "type": "string",
+                     "comment": "Overview of effort"
+                      }, {
+                     "name": "Method",
+                     "type": "string",
+                     "comment": "High-level description of the method used"
+                      }]
+                    }]
+
+                  }]
+                }, {
+               "name": "Respomsible Party",
+               "comment": "based on ISO 19115",
+               "children": [{
+                 "name": "Attributes",
+                 "children": [{
+                   "name": "id",
+                   "type": "NCName",
+                   "comment": "Handle to external database"
+                    }]
+                  }, {
+                 "name": "Sequence",
+                 "children": [{
+                   "name": "Individual Name",
+                   "type": "string"
+                    }, {
+                   "name": "Organization Name",
+                   "type": "string"
+                    }, {
+                   "name": "Position Name",
+                   "type": "string"
+                    }, {
+                   "name": "Contact Info",
+                   "children": [{
+                     "name": "Sequence",
+                     "children": [{
+                       "name": "Phone",
+                       "children": [{
+                         "name": "Sequence",
+                         "children": [{
+                           "name": "Voice",
+                           "type": "string"
+                            }, {
+                           "name": "Facsimile",
+                           "type": "string"
+                            }]
+                          }]
+                        }, {
+                       "name": "Address",
+                       "children": [{
+                         "name": "Sequence",
+                         "children": [{
+                           "name": "Delivery Point",
+                           "type": "string"
+                            }, {
+                           "name": "City",
+                           "type": "string"
+                            }, {
+                           "name": "Administrative Area",
+                           "type": "string"
+                            }, {
+                           "name": "Postal Code",
+                           "type": "string"
+                            }, {
+                           "name": "Country",
+                           "type": "string"
+                            }, {
+                           "name": "Electronic Mail Address",
+                           "type": "string"
+                            }]
+                          }]
+                        }, {
+                       "name": "Online Resource",
+                       "comment": "We do not fully conform to the onlineResources of ISO 19115",
+                       "children": [{
+                         "name": "Attributes",
+                         "children": [{
+                           "name": "##Any"
+                            }]
+                          }]
+                        }, {
+                       "name": "Hours of Service",
+                       "type": "string"
+                        }, {
+                       "name": "Contact Instructions",
+                       "type": "string"
+                        }]
+                      }]
+                    }]
+                  }]
+                }]
+              }]
+            }, {
+           "name": "Sequence",
+           "children": [{
+             "name": "Quality",
+             "comment": "If no quality assurance, create an entry of Category unverified spanning the acoustic record.",
+             "children": [{
+               "name": "Sequence",
+               "children": [{
+                 "name": "Start",
+                 "type": "dateTime"
+                  }, {
+                 "name": "End",
+                 "type": "dateTime"
+                  }, {
+                 "name": "Category",
+                 "type": "string",
+                 "comment": "categories: unverified, good, compromised, unusable"
+
+                  }, {
+                 "name": "Frequency Range",
+                 "comment": "QA metric applies to what frequency range?",
+                 "children": [{
+                   "name": "Sequence",
+                   "children": [{
+                     "name": "Low_Hz",
+                     "type": "double"
+                      }, {
+                     "name": "High_Hz",
+                     "type": "double"
+                      }]
+                    }]
+                  }, {
+                 "name": "Channel",
+                 "type": "integer"
+                  }, {
+                 "name": "Comment",
+                 "type": "string",
+                 "comment": "Additional qualitative information"
+                  }]
+                }]
+              }]
+            }]
+          }]
+        },
+     {
+       "name": "Path Element Type",
+       "children": [{
+         "name": "Path Element Type",
+         "children": [{
+           "name": "Trackline",
+           "type": "double"
+            }, {
+           "name": "Start",
+           "type": "dateTime"
+            }, {
+           "name": "End",
+           "type": "dateTime"
+            }, {
+           "name": "Comment",
+           "type": "string"
+            }]
+          }]
+        }
+      ]
+ }
