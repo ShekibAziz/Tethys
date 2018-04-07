@@ -29,6 +29,10 @@
       width: 35%;
     }
 
+    .red {
+      border: solid red 1px;
+    }
+
   </style>
 </head>
 
@@ -99,6 +103,7 @@
 
       </div>
     </div>
+    <div class="red" id="response"></div>
 
   </div>
 
@@ -118,7 +123,10 @@
       var url = "http://localhost:9779/XQuery";
       var dataKey = 'XQuery';
       var dataValue = `
-(: import Tethys schema so we have type information about the docuements :) import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd"; (: import utility functions :) import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq"; let $xmldocument := 0 (: first document :) let $xmldocs := () (: no documents so far :) (: Find all of the desired detections. This query is a bit more complicated than it need by as we are tracking which XML document the detections came from. This is sometimes useful, especially when there are multiple lines of effort across the same time and space, although it is not really needed here. We create a temporary variable with all of the detections and then sort them in the next query. Again, this is overengineering for this specific query, but would be needed to return detections from multiple deployments in order. :) let $detections := for $item in ( for $det at $p in collection("Detections")/ty:Detections let $xmldocument := $xmldocument + 1 let $xmldocs := ($xmldocs, $det/DataSource) (: conditions on Detections group :) where upper-case($det/DataSource/Site) = upper-case("M") and upper-case($det/DataSource/Project) = upper-case("SOCAL") and $det/DataSource/Deployment = 38.000000 return for $detection in $det/OnEffort/Detection (: OnEffort/OffEffort :) (: conditions on individual Detections, here we use an abbreviation for the species name :) where $detection/SpeciesID = lib:abbrev2tsn("Zc", "NOAA.NMFS.v1") return
+(: import Tethys schema so we have type information about the docuements :) 
+import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd"; 
+(: import utility functions :)
+import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq"; let $xmldocument := 0 (: first document :) let $xmldocs := () (: no documents so far :) (: Find all of the desired detections. This query is a bit more complicated than it need by as we are tracking which XML document the detections came from. This is sometimes useful, especially when there are multiple lines of effort across the same time and space, although it is not really needed here. We create a temporary variable with all of the detections and then sort them in the next query. Again, this is overengineering for this specific query, but would be needed to return detections from multiple deployments in order. :) let $detections := for $item in ( for $det at $p in collection("Detections")/ty:Detections let $xmldocument := $xmldocument + 1 let $xmldocs := ($xmldocs, $det/DataSource) (: conditions on Detections group :) where upper-case($det/DataSource/Site) = upper-case("M") and upper-case($det/DataSource/Project) = upper-case("SOCAL") and $det/DataSource/Deployment = 38.000000 return for $detection in $det/OnEffort/Detection (: OnEffort/OffEffort :) (: conditions on individual Detections, here we use an abbreviation for the species name :) where $detection/SpeciesID = lib:abbrev2tsn("Zc", "NOAA.NMFS.v1") return
 <Detection>
   {$detection/Start} {$detection/End}
   <idx>{xs:integer($p)}</idx>
@@ -138,7 +146,8 @@
   </Sources>
 </ty:Result>`;
 
-      var dataValue2 = `import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd";
+      var dataValue2 = `
+import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd";
 import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq";
 
 <ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -147,14 +156,70 @@ for $deployment in collection("Deployments")/ty:Deployment
   return data($deployment/Project)
 }
 </ty:Result>`;
+
+      var test1 = `
+ import schema namespace ty='http://tethys.sdsu.edu/schema/1.0' at 'tethys.xsd';
+import module namespace lib='http://tethys.sdsu.edu/XQueryFns' at 'Tethys.xq';
+collection("SpeciesAbbreviations")/ty:Abbreviations/Name`;
+
+
       var data = {
         "XQuery": dataValue2
       };
       $.post(url, data, function(response) {
         console.log(response);
-      })
+        $('#response').html(response);
+      });
+
+
 
     }); // document Ready
+
+
+
+
+
+
+
+
+
+    // Projects
+    //import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd";
+    //import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq";
+    //
+    //<ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    //{
+    //for $deployment in collection("Deployments")/ty:Deployment
+    //  return data($deployment/Project)
+    //}
+    //</ty:Result>
+    //
+    //
+    //// Lat-long per project
+    //import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd";
+    //import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq";
+    //
+    //<ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    //{
+    //for $deployment in collection("Deployments")/ty:Deployment
+    //  where $deployment/Project = "OCNMS"
+    //  return <li>{data($deployment/RecoveryDetails/Longitude)},{data($deployment/RecoveryDetails/Latitude)}</li>
+    //}
+    //</ty:Result>
+    //
+    //
+    ////Deployment with basic information
+    //import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd";
+    //import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq";
+    //
+    //<ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    //{
+    //for $deployment in collection("Deployments")/ty:Deployment
+    //  where $deployment/Project = "OCNMS"
+    //  return <li>
+    //{data($deployment/Site)},{data($deployment/Cruise)},{data($deployment/Platform)},{data($deployment/Instrument/Type)},{data($deployment/SamplingDetails/Channel/Start)},{data($deployment/RecoveryDetails/Longitude)},{data($deployment/RecoveryDetails/Latitude)}</li>
+    //}
+    //</ty:Result>
 
   </script>
 
