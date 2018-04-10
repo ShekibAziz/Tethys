@@ -83,9 +83,8 @@
             <select class="form-control" id="project">
                 <option>---</option>
                 <option>SOCAL</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
+                <option>ALEUT</option>
+                <option>CINMS</option>
               </select>
           </div>
           <div class="form-group">
@@ -97,7 +96,7 @@
             <input type="text" class="form-control" id="cruise" placeholder="Cruise name">
           </div>
 
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" id="submit" class="btn btn-primary">Submit</button>
         </form>
 
 
@@ -123,103 +122,197 @@
       var url = "http://localhost:9779/XQuery";
       var dataKey = 'XQuery';
       var dataValue = `
-(: import Tethys schema so we have type information about the docuements :) 
-import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd"; 
-(: import utility functions :)
-import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq"; let $xmldocument := 0 (: first document :) let $xmldocs := () (: no documents so far :) (: Find all of the desired detections. This query is a bit more complicated than it need by as we are tracking which XML document the detections came from. This is sometimes useful, especially when there are multiple lines of effort across the same time and space, although it is not really needed here. We create a temporary variable with all of the detections and then sort them in the next query. Again, this is overengineering for this specific query, but would be needed to return detections from multiple deployments in order. :) let $detections := for $item in ( for $det at $p in collection("Detections")/ty:Detections let $xmldocument := $xmldocument + 1 let $xmldocs := ($xmldocs, $det/DataSource) (: conditions on Detections group :) where upper-case($det/DataSource/Site) = upper-case("M") and upper-case($det/DataSource/Project) = upper-case("SOCAL") and $det/DataSource/Deployment = 38.000000 return for $detection in $det/OnEffort/Detection (: OnEffort/OffEffort :) (: conditions on individual Detections, here we use an abbreviation for the species name :) where $detection/SpeciesID = lib:abbrev2tsn("Zc", "NOAA.NMFS.v1") return
-<Detection>
-  {$detection/Start} {$detection/End}
-  <idx>{xs:integer($p)}</idx>
-</Detection>
-) return $item (: Sources contains the list of indices corresponding to all of the documents from which we drew detections :) let $sources := distinct-values(for $d in $detections return $d/idx) (: Finally, we return the detections and a lsit of the data sources from which they came. :) return
-<ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Detections>
-    {(: Rewrite the detections mapping each detection to a deployment/ensemble :) for $d in $detections order by $d/Start return
-    <Detection>
-      {$d/Start} {$d/End}
-      <idx>{index-of(($sources), $d/idx)}</idx>
-    </Detection>
-    }
-  </Detections>
-  <Sources>
-    { (: Write out the information for the deployment/ensembles :) for $source in $sources return collection("Detections")[xs:decimal($source)]/ty:Detections/DataSource }
-  </Sources>
-</ty:Result>`;
+      (: import Tethys schema so we have type information about the docuements :) 
+      import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd"; 
+      (: import utility functions :)
+      import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq"; let $xmldocument := 0 (: first document :) let $xmldocs := () (: no documents so far :) (: Find all of the desired detections. This query is a bit more complicated than it need by as we are tracking which XML document the detections came from. This is sometimes useful, especially when there are multiple lines of effort across the same time and space, although it is not really needed here. We create a temporary variable with all of the detections and then sort them in the next query. Again, this is overengineering for this specific query, but would be needed to return detections from multiple deployments in order. :) let $detections := for $item in ( for $det at $p in collection("Detections")/ty:Detections let $xmldocument := $xmldocument + 1 let $xmldocs := ($xmldocs, $det/DataSource) (: conditions on Detections group :) where upper-case($det/DataSource/Site) = upper-case("M") and upper-case($det/DataSource/Project) = upper-case("SOCAL") and $det/DataSource/Deployment = 38.000000 return for $detection in $det/OnEffort/Detection (: OnEffort/OffEffort :) (: conditions on individual Detections, here we use an abbreviation for the species name :) where $detection/SpeciesID = lib:abbrev2tsn("Zc", "NOAA.NMFS.v1") return
+      <Detection>
+        {$detection/Start} {$detection/End}
+        <idx>{xs:integer($p)}</idx>
+      </Detection>
+      ) return $item (: Sources contains the list of indices corresponding to all of the documents from which we drew detections :) let $sources := distinct-values(for $d in $detections return $d/idx) (: Finally, we return the detections and a lsit of the data sources from which they came. :) return
+      <ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Detections>
+          {(: Rewrite the detections mapping each detection to a deployment/ensemble :) for $d in $detections order by $d/Start return
+          <Detection>
+            {$d/Start} {$d/End}
+            <idx>{index-of(($sources), $d/idx)}</idx>
+          </Detection>
+          }
+        </Detections>
+        <Sources>
+          { (: Write out the information for the deployment/ensembles :) for $source in $sources return collection("Detections")[xs:decimal($source)]/ty:Detections/DataSource }
+        </Sources>
+      </ty:Result>`;
 
       var dataValue2 = `
-import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd";
-import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq";
+      import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd";
+      import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq";
 
-<ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-{
-for $deployment in collection("Deployments")/ty:Deployment
-  return data($deployment/Project)
-}
-</ty:Result>`;
+      <ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      {
+      for $deployment in collection("Deployments")/ty:Deployment 
+      where $deployment/Project = "SOCAL"
 
-      var test1 = `
- import schema namespace ty='http://tethys.sdsu.edu/schema/1.0' at 'tethys.xsd';
-import module namespace lib='http://tethys.sdsu.edu/XQueryFns' at 'Tethys.xq';
-collection("SpeciesAbbreviations")/ty:Abbreviations/Name`;
+      return data($deployment/Project)
+
+      }
+      </ty:Result>
+    `;
+
+      var DataValue3 = `
+      import schema namespace ty='http://tethys.sdsu.edu/schema/1.0' at 'tethys.xsd';
+      import module namespace lib='http://tethys.sdsu.edu/XQueryFns' at 'Tethys.xq';
+
+      collection("SpeciesAbbreviations")/ty:Abbreviations/Name
+    `;
+
+      //Projects
+      var DataValue4 = `
+      import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd";
+      import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq";
+      
+      <ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      {
+      for $deployment in collection("Deployments")/ty:Deployment
+        return data($deployment/Project)
+      }
+      </ty:Result>
+    `;
+
+      // Lat-long per project
+      var DataValue5 = `
+      import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd";
+      import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq";
+      
+      <ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      {
+      for $deployment in collection("Deployments")/ty:Deployment
+        where $deployment/Project = "SOCAL"
+        return <li>{data($deployment/RecoveryDetails/Longitude)},{data($deployment/RecoveryDetails/Latitude)}</li>
+      }
+      </ty:Result>
+    `;
+
+      //Deployment with basic information
+      var basicQuery = ` 
+      import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd";
+      import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq";
+    
+      <ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      {
+      for $deployment in collection("Deployments")/ty:Deployment
+        where $deployment/Project = "SOCAL"
+        return <li>
+      {data($deployment/Site)},{data($deployment/Cruise)},{data($deployment/Platform)},{data($deployment/Instrument/Type)},{data($deployment/SamplingDetails/Channel/Start)},{data($deployment/RecoveryDetails/Longitude)},{data($deployment/RecoveryDetails/Latitude)}</li>
+      }
+      </ty:Result>
+    `;
+
+      /*  Peaces to building my own query */
+
+      var myQNameSpace = `
+      import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd";
+      import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq";
+    `;
+
+      var myQResultOpenTag = `
+      <ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      {
+      for $deployment in collection("Deployments")/ty:Deployment
+    `;
+
+      var myQWhereProject1 = `where $deployment/Project =`;
 
 
-      var data = {
-        "XQuery": dataValue2
-      };
-      $.post(url, data, function(response) {
-        console.log(response);
-        $('#response').html(response);
+      var myQWhereSite1 = `where $deployment/Site =`;
+      var myQWhereSiteNot1 = ` and $deployment/Site =`;
+
+
+      var myQWhereCruise1 = `where $deployment/Cruise =`;
+      var myQWhereCruiseNot1 = ` and $deployment/Cruise =`;
+
+      var myQReturn = `return 
+      <li> 
+        {data($deployment)}
+      <br />
+      </li>
+    `;
+
+      var myQResultClosingTag = `
+      }
+      </ty:Result>`;
+
+
+
+
+      $('#submit').on('click', function(e) {
+        var i = 0;
+        e.preventDefault();
+
+        var project = $('#project').val();
+        console.log("project: ", project);
+
+        var site = $('#site').val();
+        console.log("site: ", site);
+
+        var cruise = $('#cruise').val();
+        console.log("cruise: ", cruise);
+
+        var fullQuery = "";
+
+
+
+        fullQuery += myQNameSpace
+        fullQuery += myQResultOpenTag;
+        if (!isEmpty(project)) {
+          fullQuery += myQWhereProject1 + ' "' + project + '" ';
+          i++;
+        }
+        if (!isEmpty(site)) {
+          if (i > 0)
+            fullQuery += myQWhereSiteNot1 + ' "' + site + '" ';
+          else {
+            fullQuery += myQWhereSite1 + ' "' + site + '" ';
+            i++;
+          }
+        }
+        if (!isEmpty(cruise)) {
+          if (i > 0)
+            fullQuery += myQWhereCruiseNot1 + ' "' + cruise + '" ';
+          else {
+            fullQuery += myQWhereCruise1 + ' "' + cruise + '" ';
+            i++
+          }
+        }
+
+        fullQuery += myQReturn
+        fullQuery += myQResultClosingTag;
+        console.log(fullQuery);
+        var data = {
+          "XQuery": fullQuery
+        };
+
+        $.post(url, data, function(response) {
+          console.log("response: ", response);
+          $('#response').html(response);
+        });
+
+
+
       });
+
+
+      //true is something is empt or has '---' value
+      function isEmpty(info) {
+        info = info.trim();
+        return (info.length == 0) || (info == '---')
+      }
+
 
 
 
     }); // document Ready
-
-
-
-
-
-
-
-
-
-    // Projects
-    //import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd";
-    //import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq";
-    //
-    //<ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    //{
-    //for $deployment in collection("Deployments")/ty:Deployment
-    //  return data($deployment/Project)
-    //}
-    //</ty:Result>
-    //
-    //
-    //// Lat-long per project
-    //import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd";
-    //import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq";
-    //
-    //<ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    //{
-    //for $deployment in collection("Deployments")/ty:Deployment
-    //  where $deployment/Project = "OCNMS"
-    //  return <li>{data($deployment/RecoveryDetails/Longitude)},{data($deployment/RecoveryDetails/Latitude)}</li>
-    //}
-    //</ty:Result>
-    //
-    //
-    ////Deployment with basic information
-    //import schema namespace ty="http://tethys.sdsu.edu/schema/1.0" at "tethys.xsd";
-    //import module namespace lib="http://tethys.sdsu.edu/XQueryFns" at "Tethys.xq";
-    //
-    //<ty:Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    //{
-    //for $deployment in collection("Deployments")/ty:Deployment
-    //  where $deployment/Project = "OCNMS"
-    //  return <li>
-    //{data($deployment/Site)},{data($deployment/Cruise)},{data($deployment/Platform)},{data($deployment/Instrument/Type)},{data($deployment/SamplingDetails/Channel/Start)},{data($deployment/RecoveryDetails/Longitude)},{data($deployment/RecoveryDetails/Latitude)}</li>
-    //}
-    //</ty:Result>
 
   </script>
 
