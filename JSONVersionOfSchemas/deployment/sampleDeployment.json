@@ -1,0 +1,277 @@
+{
+	"name": "Deployment",
+	"children": [{
+		"name": "Project",
+		"children": []
+			}, {
+		"name": "DeploymentID",
+		"children": []
+			}, {
+		"name": "DeploymentAlias",
+		"children": []
+			}, {
+		"name": "Platform",
+		"children": []
+			}, {
+		"name": "Region",
+		"children": []
+			}, {
+		"name": "Instrument",
+		"children": [{
+			"name": "Type",
+			"children": []
+				}, {
+			"name": "ID",
+			"children": []
+				}]
+			}, {
+		"name": "SamplingDetails",
+		"children": [{
+			"name": "Channel",
+			"children": []
+				}]
+			}, {
+		"name": "QualityAssurance",
+		"children": []
+			}, {
+		"name": "Data",
+		"children": [{
+			"name": "Audio",
+			"children": [{
+				"name": "URI",
+				"children": []
+					}, {
+				"name": "Processed",
+				"children": []
+					}, {
+				"name": "Raw",
+				"children": []
+					}]
+				}, {
+			"name": "Track",
+			"children": [{
+				"name": "Points",
+				"children": [{
+					"name": "Trackline",
+					"children": []
+						}, {
+					"name": "Point",
+					"children": [{
+						"name": "TimeStamp",
+						"children": []
+							}, {
+						"name": "Bearing_DegN",
+						"children": []
+							}, {
+						"name": "Speed_kn",
+						"children": []
+							}, {
+						"name": "Pitch_deg",
+						"children": []
+							}, {
+						"name": "Roll_deg",
+						"children": []
+							}, {
+						"name": "Depth_m",
+						"children": []
+							}, {
+						"name": "BottomDepth_m",
+						"children": []
+							}]
+						}]
+					}, {
+				"name": "TrackEffort",
+				"children": [{
+					"name": "OnPath",
+					"children": []
+						}, {
+					"name": "OffPath",
+					"children": []
+						}]
+					}, {
+				"name": "URI",
+				"children": []
+					}]
+				}]
+			}, {
+		"name": "DeploymentDetails",
+		"children": []
+			}, {
+		"name": "RecoveryDetails",
+		"children": []
+			}, {
+		"name": "Sensors",
+		"children": [{
+			"name": "Audio",
+			"children": []
+				}, {
+			"name": "Depth",
+			"children": []
+				}, {
+			"name": "Sensor",
+			"children": []
+				}]
+			}, {
+		"name": "Cruise",
+		"children": []
+			}, {
+		"name": "Site",
+		"children": []
+			}, {
+		"name": "Cruise",
+		"children": []
+			}, {
+		"name": "SiteAliases",
+		"children": [{
+			"name": "Site",
+			"children": []
+				}]
+			}]
+}, {
+	"name": "Number",
+	"children": []
+}, {
+	"name": "SensorID",
+	"children": []
+}, {
+	"name": "Geometry",
+	"children": [{
+		"name": "x_m",
+		"children": []
+			}, {
+		"name": "y_m",
+		"children": []
+			}, {
+		"name": "z_m",
+		"children": []
+			}]
+}, {
+	"name": "Name",
+	"children": []
+}, {
+	"name": "Description",
+	"children": []
+}, {
+	"name": "ChannelNumber",
+	"children": []
+}, {
+	"name": "SensorNumber",
+	"children": []
+}, {
+	"name": "Start",
+	"children": []
+}, {
+	"name": "End",
+	"children": []
+}, {
+	"name": "Sampling",
+	"children": [{
+		"name": "Regimen",
+		"children": [{
+			"name": "TimeStamp",
+			"children": []
+				}, {
+			"name": "SampleRate_kHz",
+			"children": []
+				}, {
+			"name": "SampleBits",
+			"children": []
+				}]
+			}]
+}, {
+	"name": "Gain",
+	"children": [{
+		"name": "Regimen",
+		"children": [{
+			"name": "TimeStamp",
+			"children": []
+				}, {
+			"name": "Gain_dB",
+			"children": []
+				}, {
+			"name": "Gain_rel",
+			"children": []
+				}]
+			}]
+}, {
+	"name": "DutyCycle",
+	"children": [{
+		"name": "Regimen",
+		"children": [{
+			"name": "TimeStamp",
+			"children": []
+				}, {
+			"name": "RecordingDuration_m",
+			"children": []
+				}, {
+			"name": "RecordingInterval_m",
+			"children": []
+				}]
+			}]
+}, {
+	"name": "DepthInstrument_m",
+	"children": []
+}, {
+	"name": "DepthBottom_m",
+	"children": []
+}, {
+	"name": "TimeStamp",
+	"children": []
+}, {
+	"name": "AudioTimeStamp",
+	"children": []
+}, {
+	"name": "Vessel",
+	"children": []
+}, {
+	"name": "Trackline",
+	"children": []
+}, {
+	"name": "Start",
+	"children": []
+}, {
+	"name": "End",
+	"children": []
+}, {
+	"name": "Comment",
+	"children": []
+}, {
+	"name": "Type",
+	"children": []
+}, {
+	"name": "Properties",
+	"children": []
+}, {
+	"name": "HydrophoneID",
+	"children": []
+}, {
+	"name": "PreampID",
+	"children": []
+}, {
+	"name": "Quality",
+	"children": [{
+		"name": "Start",
+		"children": []
+			}, {
+		"name": "End",
+		"children": []
+			}, {
+		"name": "Category",
+		"children": []
+			}, {
+		"name": "FrequencyRange",
+		"children": [{
+			"name": "Low_Hz",
+			"children": []
+				}, {
+			"name": "High_Hz",
+			"children": []
+				}]
+			}, {
+		"name": "Channel",
+		"children": []
+			}, {
+		"name": "Comment",
+		"children": []
+			}]
+}

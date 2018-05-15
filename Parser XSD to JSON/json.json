@@ -1,0 +1,43 @@
+{
+	"name": "shipOrder",
+	"children": [{
+		"name": "Attributes",
+		"children": [{
+			"name": "orderid",
+			"type": "string"
+    }]
+  }, {
+		"name": "orderPerson",
+		"type": "string"
+  }, {
+		"name": "shipTo",
+		"children": [{
+			"name": "name",
+			"type": "string"
+    }, {
+			"name": "address",
+			"type": "string"
+    }, {
+			"name": "city",
+			"type": "string"
+    }, {
+			"name": "country",
+			"type": "string"
+    }]
+  }, {
+		"name": "item",
+		"children": [{
+			"name": "title",
+			"type": "string"
+    }, {
+			"name": "note",
+			"type": "string"
+    }, {
+			"name": "quantity",
+			"type": "positiveInteger"
+    }, {
+			"name": "price",
+			"type": "decimal"
+    }]
+  }]
+}
